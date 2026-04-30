@@ -1,19 +1,51 @@
 {
   "name": "tripkit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Open-source framework for AI-assisted trip planning with beautiful interactive visualizers",
   "main": "convert.js",
+  "bin": {
+    "tripkit": "convert.js"
+  },
+  "files": [
+    "convert.js",
+    "renderers/html/tripkit-renderer.html",
+    "schema/tripkit.schema.yaml",
+    "examples/oregon-spring-2026.yaml",
+    "agent/questionnaire.yaml",
+    "agent/AGENT-SKILL.md",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
   "scripts": {
     "convert": "node convert.js",
-    "example": "node convert.js examples/oregon-spring-2026.yaml examples/oregon-spring-2026.html"
+    "example": "node convert.js examples/oregon-spring-2026.yaml examples/oregon-spring-2026.html",
+    "test": "node convert.js examples/oregon-spring-2026.yaml /tmp/tripkit-test.html && test -s /tmp/tripkit-test.html && echo 'OK'",
+    "prepublishOnly": "npm test"
   },
-  "keywords": ["trip-planning", "travel", "road-trip", "itinerary", "leaflet", "map", "ai-agent"],
+  "keywords": [
+    "trip-planning",
+    "travel",
+    "road-trip",
+    "itinerary",
+    "leaflet",
+    "map",
+    "ai-agent",
+    "yaml"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/piti/tripkit.git"
+    "url": "git+https://github.com/piti/tripkit.git"
+  },
+  "homepage": "https://github.com/piti/tripkit#readme",
+  "bugs": {
+    "url": "https://github.com/piti/tripkit/issues"
   },
   "author": "Peter Kwidzinski",
   "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "js-yaml": "^4.1.0"
   }

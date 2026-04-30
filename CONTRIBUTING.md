@@ -5,10 +5,9 @@ We welcome contributions! Here's how to get involved.
 ## Roadmap
 
 ### Now
-- Mobile responsive improvements (sidebar/map stacking below 960px)
+- Mobile polish (legend overlap, day-nav crowding at iPhone widths)
 - Dark mode theme support (`theme.dark_mode: true`)
-- YAML validation CLI (`node validate.js trip.yaml`)
-- Screenshot for README
+- YAML validation CLI (`tripkit validate trip.yaml`)
 
 ### Next
 - React renderer component library (`<TripMap>`, `<DaySidebar>`, `<StopCard>`)
@@ -21,7 +20,6 @@ We welcome contributions! Here's how to get involved.
 - Flight + hotel search for non-road-trip journeys
 - Budget tracking with running cost totals
 - Export to PDF for offline use
-- npm package (`npm install tripkit`)
 
 ## How to Contribute
 
@@ -32,8 +30,16 @@ The easiest way to contribute! Plan a trip using the schema, submit your YAML as
 The HTML renderer is at `renderers/html/tripkit-renderer.html`. Test changes with:
 ```bash
 npm install
+npm test                                        # quick smoke test
 node convert.js examples/oregon-spring-2026.yaml /tmp/test.html
 open /tmp/test.html
+```
+
+### Publishing a New Version (maintainers)
+```bash
+npm version patch   # or minor / major
+npm publish         # prepublishOnly hook runs npm test first
+git push --follow-tags
 ```
 
 ### Build the React Renderer

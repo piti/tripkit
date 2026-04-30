@@ -1,40 +1,43 @@
 #!/usr/bin/env node
 /**
  * TripKit CLI — Convert YAML trip data to interactive HTML
- * 
- * Usage:
- *   node convert.js <trip.yaml> [output.html]
- * 
- * Example:
- *   node convert.js examples/oregon-spring-2026.yaml my-trip.html
- * 
- * Dependencies:
- *   npm install js-yaml
  */
 
 const fs = require('fs');
 const path = require('path');
 
+let yaml;
 try {
-  require.resolve('js-yaml');
+  yaml = require('js-yaml');
 } catch (e) {
-  console.error('Missing dependency. Run: npm install js-yaml');
+  console.error('Missing dependency. Run: npm install (from the tripkit directory)');
   process.exit(1);
 }
 
-const yaml = require('js-yaml');
+const invokedAs = path.basename(process.argv[1] || 'tripkit') === 'convert.js'
+  ? 'node convert.js'
+  : 'tripkit';
 
 const args = process.argv.slice(2);
-if (args.length === 0) {
+if (args.length === 0 || args[0] === '-h' || args[0] === '--help') {
   console.log(`
 TripKit — Convert YAML trip data to interactive HTML
 
 Usage:
-  node convert.js <trip.yaml> [output.html]
+  ${invokedAs} <trip.yaml> [output.html]
 
 Example:
-  node convert.js examples/oregon-spring-2026.yaml my-trip.html
+  ${invokedAs} my-trip.yaml my-trip.html
+
+Flags:
+  -h, --help       Show this help
+  -v, --version    Show version
 `);
+  process.exit(0);
+}
+
+if (args[0] === '-v' || args[0] === '--version') {
+  console.log(require(path.join(__dirname, 'package.json')).version);
   process.exit(0);
 }
 

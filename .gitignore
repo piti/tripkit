@@ -9,3 +9,8 @@ examples/*.html
 # Private context — not for public repo
 CLAUDE.md
 .planning/
+
+# Tooling caches
+.memsearch/
+.playwright-mcp/
+*.tgz

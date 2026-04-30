@@ -1,11 +1,15 @@
 # 🗺️ TripKit
 
+[![npm version](https://img.shields.io/npm/v/tripkit.svg)](https://www.npmjs.com/package/tripkit)
+[![npm downloads](https://img.shields.io/npm/dm/tripkit.svg)](https://www.npmjs.com/package/tripkit)
+[![license](https://img.shields.io/npm/l/tripkit.svg)](./LICENSE)
+
 **Open-source framework for AI-assisted trip planning with beautiful interactive visualizers.**
 
 TripKit is a structured data schema + rendering engine that turns trip plans into stunning interactive maps with day-by-day itineraries. It works with any AI agent (Claude, GPT, Gemini) or can be filled in manually.
 
 <p align="center">
-  <img src="docs/screenshot.png" alt="TripKit Visualizer" width="800">
+  <img src="https://raw.githubusercontent.com/piti/tripkit/main/docs/screenshot.png" alt="TripKit Visualizer" width="800">
 </p>
 
 ## Why TripKit?
@@ -40,36 +44,40 @@ Born from a real 6-day Oregon road trip planned iteratively with AI. Every featu
 
 ## Quick Start
 
-### Option 1: CLI (developers)
+### Option 1: One-liner via `npx` (recommended)
+
+**Prerequisite:** [Node.js](https://nodejs.org) 18 or newer. No install, no clone.
 
 ```bash
-# Clone the repo
-git clone https://github.com/piti/tripkit.git
-cd tripkit
-
-# Install dependencies
-npm install
-
-# Convert a YAML trip plan to interactive HTML
-node convert.js examples/oregon-spring-2026.yaml my-trip.html
-
-# Open in browser
+npx tripkit my-trip.yaml my-trip.html
 open my-trip.html
 ```
 
-### Option 2: With an AI Agent (everyone)
+That's it — `npx` fetches TripKit on first run and caches it. Use any YAML path on your machine.
+
+### Option 2: Clone the repo (for hacking on the renderer)
+
+```bash
+git clone https://github.com/piti/tripkit.git
+cd tripkit
+npm install
+node convert.js examples/oregon-spring-2026.yaml my-trip.html
+open my-trip.html
+```
+
+### Option 3: With an AI Agent (everyone)
 
 1. Start a conversation with your preferred AI agent (Claude recommended)
 2. Share the `agent/AGENT-SKILL.md` as context
 3. Tell it about your trip: _"I'm planning a 5-day road trip through the Pacific Northwest with my family..."_
 4. The agent uses the questionnaire to gather details, researches routes/hotels/restaurants, and generates a TripKit YAML file
-5. Convert to HTML with the CLI, or ask the agent to render it directly
+5. Convert to HTML with `npx tripkit your-trip.yaml`, or ask the agent to render it directly
 
-### Option 3: Manual (no AI needed)
+### Option 4: Manual (no AI needed)
 
 1. Copy `examples/oregon-spring-2026.yaml` as a starting template
 2. Edit with your own trip data
-3. Run `node convert.js your-trip.yaml`
+3. Run `npx tripkit your-trip.yaml`
 4. Open the generated HTML file
 
 ## Project Structure
