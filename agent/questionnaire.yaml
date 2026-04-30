@@ -1,0 +1,182 @@
+# TripKit — Trip Planning Questionnaire
+# This structured elicitation flow gathers the information needed
+# to generate a trip plan. Any AI agent can use this template.
+#
+# USAGE:
+# - Present questions conversationally, not as a survey
+# - Questions are grouped by priority (must-ask → nice-to-have)
+# - Skip questions when answers are already obvious from context
+# - The output should populate agent_context.preferences and .constraints
+
+# ============================================================
+# PHASE 1: DESTINATION & DATES (must-ask)
+# ============================================================
+phase_1_destination:
+  - id: destination
+    question: "Where are you thinking of going? Any specific region, state, or country?"
+    type: open_text
+    follow_up: "Any must-see places or attractions?"
+    maps_to: agent_context.constraints.must_see
+
+  - id: dates
+    question: "When are you planning to go, and how many days do you have?"
+    type: open_text
+    maps_to: trip.dates, trip.total_days
+
+  - id: origin
+    question: "Where will you be starting from?"
+    type: open_text
+    maps_to: trip.origin
+    skip_if: "Known from user context/location"
+
+# ============================================================
+# PHASE 2: TRAVEL PARTY (must-ask)
+# ============================================================
+phase_2_travelers:
+  - id: party_size
+    question: "Who's coming along? Adults, kids, ages?"
+    type: open_text
+    maps_to: trip.travelers
+    why: "Kid ages affect restaurant choices, hike difficulty, lodging needs, and activity restrictions (e.g., 21+ venues)"
+
+  - id: vehicle
+    question: "How are you getting there? Car, RV, flying + rental?"
+    type: single_select
+    options: ["Car/SUV", "RV/Camper", "Flying + rental car", "Train", "Other"]
+    maps_to: trip.vehicle
+
+# ============================================================
+# PHASE 3: INTERESTS & STYLE (should-ask)
+# ============================================================
+phase_3_interests:
+  - id: interests
+    question: "What kind of experiences are you hoping for?"
+    type: multi_select
+    options:
+      - "Hiking & nature"
+      - "Beaches & coast"
+      - "Food & restaurants"
+      - "History & culture"
+      - "Photography"
+      - "Adventure sports"
+      - "Relaxation & spa"
+      - "Shopping & towns"
+      - "Wildlife"
+      - "Scenic drives"
+      - "Family activities"
+      - "Nightlife & entertainment"
+    maps_to: agent_context.preferences.interests
+
+  - id: pace
+    question: "How packed do you want the days?"
+    type: single_select
+    options:
+      - label: "Relaxed"
+        description: "Sleep in, 1–2 stops per day, lots of downtime"
+      - label: "Moderate"
+        description: "Balanced — 3–4 stops with breaks between"
+      - label: "Packed"
+        description: "See everything! Early mornings, full days"
+    maps_to: agent_context.preferences.pace
+
+  - id: max_drive
+    question: "How much driving per day is comfortable for your group?"
+    type: single_select
+    options:
+      - "Under 3 hours"
+      - "3–5 hours"
+      - "5–7 hours"
+      - "Whatever it takes"
+    maps_to: agent_context.constraints.max_drive_per_day
+
+# ============================================================
+# PHASE 4: ACCOMMODATION (should-ask)
+# ============================================================
+phase_4_lodging:
+  - id: budget
+    question: "What's your nightly lodging budget?"
+    type: single_select
+    options:
+      - label: "Budget ($50–100)"
+        description: "Motels, hostels, basic hotels"
+      - label: "Mid-range ($100–180)"
+        description: "Quality hotels, nice B&Bs"
+      - label: "Upscale ($180–300)"
+        description: "Boutique hotels, resorts"
+      - label: "Luxury ($300+)"
+        description: "Top-tier resorts, unique stays"
+      - label: "Mixed"
+        description: "Save on some nights, splurge on others"
+    maps_to: agent_context.preferences.budget
+
+  - id: lodging_style
+    question: "Any accommodation preferences?"
+    type: multi_select
+    options:
+      - "Hotel chain loyalty program (specify which)"
+      - "Unique/boutique stays"
+      - "Airbnb/vacation rentals"
+      - "Camping/glamping"
+      - "Must have pool"
+      - "Must have free breakfast"
+      - "Must have kitchen/kitchenette"
+      - "Pet-friendly needed"
+    maps_to: agent_context.preferences.accommodation_chain
+    follow_up_if: "loyalty program selected → Which chain? Any existing membership?"
+
+# ============================================================
+# PHASE 5: CONSTRAINTS (ask if relevant)
+# ============================================================
+phase_5_constraints:
+  - id: avoid
+    question: "Anything you want to avoid? (traffic, tolls, highways, specific areas)"
+    type: open_text
+    maps_to: agent_context.constraints.avoid
+
+  - id: dietary
+    question: "Any dietary needs for restaurant recommendations?"
+    type: open_text
+    maps_to: agent_context.preferences.dietary
+    skip_if: "Not a food-focused trip"
+
+  - id: mobility
+    question: "Any mobility considerations? (wheelchair access, stroller, limited hiking ability)"
+    type: open_text
+    maps_to: agent_context.preferences.mobility
+
+  - id: schedule_blocks
+    question: "Any time commitments during the trip? (work calls, events, reservations)"
+    type: open_text
+    maps_to: agent_context.constraints.schedule_blocks
+
+# ============================================================
+# PHASE 6: NICE-TO-HAVE (only if conversation flows naturally)
+# ============================================================
+phase_6_extras:
+  - id: previous_trips
+    question: "Have you been to this area before? Anything you've already done?"
+    type: open_text
+    why: "Avoids recommending things they've already seen"
+
+  - id: trip_style
+    question: "Is this more of a 'see everything once' trip or a 'find a spot and settle in' trip?"
+    type: single_select
+    options: ["Road trip — see everything", "Hub & spoke — base camp + day trips", "Mix of both"]
+
+  - id: photography
+    question: "Is photography a priority? (affects timing for golden hour, sunrise spots)"
+    type: boolean
+    why: "Changes arrival times at scenic stops"
+
+# ============================================================
+# AGENT INSTRUCTIONS
+# ============================================================
+agent_notes:
+  - "Present these conversationally — NOT as a numbered survey."
+  - "Group related questions naturally. Don't ask all 15 one by one."
+  - "Phase 1-2 are essential. Phase 3-4 are important. Phase 5-6 are situational."
+  - "After Phase 1-2, you can start researching and present Phase 3-4 alongside initial ideas."
+  - "The questionnaire is a starting point, not a rigid script. Adapt to the user's energy."
+  - "If the user gives a wall of text with lots of info, extract answers — don't re-ask."
+  - "Always validate: road closures, seasonal access, permit requirements, age restrictions."
+  - "Respect the iteration_log pattern — the plan WILL change. That's the process, not a failure."

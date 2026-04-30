@@ -1,0 +1,7 @@
+node_modules/
+.DS_Store
+*.log
+
+# Generated HTML files (output of convert.js)
+# Keep the renderer template, exclude generated trip HTMLs
+examples/*.html

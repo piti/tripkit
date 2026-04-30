@@ -1,0 +1,20 @@
+{
+  "name": "tripkit",
+  "version": "1.0.0",
+  "description": "Open-source framework for AI-assisted trip planning with beautiful interactive visualizers",
+  "main": "convert.js",
+  "scripts": {
+    "convert": "node convert.js",
+    "example": "node convert.js examples/oregon-spring-2026.yaml examples/oregon-spring-2026.html"
+  },
+  "keywords": ["trip-planning", "travel", "road-trip", "itinerary", "leaflet", "map", "ai-agent"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/piti/tripkit.git"
+  },
+  "author": "Peter Kwidzinski",
+  "license": "MIT",
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}

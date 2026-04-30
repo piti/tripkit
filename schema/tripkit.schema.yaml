@@ -1,0 +1,132 @@
+# TripKit Schema Specification v1.0
+# This file defines the data contract for trip plans.
+# Any renderer (HTML, React, mobile) can consume this format.
+# Any agent (Claude, GPT, Gemini, human) can produce it.
+
+# ============================================================
+# TRIP METADATA
+# ============================================================
+trip:
+  title: string              # e.g. "Oregon Spring Break 2026"
+  subtitle: string            # e.g. "Redwoods · Coast · Waterfalls"
+  dates: string               # e.g. "April 4–9, 2026"
+  total_days: integer
+  total_miles: string         # e.g. "~1,600 mi"
+  total_stops: integer
+  travelers:                  # Optional — for agent context
+    adults: integer
+    children: integer
+    ages: string              # e.g. "Kids: 14, 17"
+  origin: string              # e.g. "Folsom, CA"
+  vehicle: string             # e.g. "SUV", "Sedan", "RV"
+
+# ============================================================
+# DAYS — the core data structure
+# ============================================================
+days:
+  - number: integer           # 1, 2, 3...
+    title: string             # e.g. "Stout Grove → Boardman → Florence"
+    date: string              # e.g. "Sunday, April 5"
+    status: string            # "completed" | "active" | "upcoming"
+    color: string             # Hex color for map route, e.g. "#2e7db5"
+
+    summary:
+      drive: string           # e.g. "5–5.5 hrs"
+      hike: string            # e.g. "1–2 hrs" or "—"
+      miles: string           # e.g. "~230 mi"
+
+    weather:                  # Optional — filled by agent closer to trip
+      high: string            # e.g. "59°F"
+      low: string             # e.g. "37°F"
+      sky: string             # e.g. "Patchy fog AM, then sunny"
+      rain_chance: string     # e.g. "10%"
+      note: string            # Human-readable context
+
+    meals:
+      breakfast: string       # Restaurant name + note
+      lunch: string
+      dinner: string
+      snack: string           # Optional
+
+    lodging:
+      name: string            # e.g. "Best Western Plus Cascade Inn & Suites"
+      location: string        # e.g. "Troutdale, Oregon"
+      price_estimate: string  # e.g. "~$150/night"
+      confirmation: string    # e.g. "ABC123456" — filled after booking
+      booked: boolean         # true once reserved
+      lat: number
+      lng: number
+      notes: string           # Free-form: pool, breakfast, special features
+      navigate_url: string    # Google Maps nav link
+
+    alerts:                   # Optional array of important warnings
+      - string                # e.g. "⏰ Dad has a 7:30 PM meeting..."
+
+    tips:                     # Optional array of pro tips
+      - string                # e.g. "Stout Grove is 28 min via Howland Hill Road..."
+
+    stops:
+      - name: string          # e.g. "Multnomah Falls"
+        lat: number           # 45.576
+        lng: number           # -122.116
+        type: string          # "hike" | "scenic" | "food" | "city" | "activity" | "beach" | "museum" | "shopping"
+        label: string         # Short display label, e.g. "Hike", "Sunset", "Lunch"
+        description: string   # 2–3 sentence description with insider tips
+        duration: string      # e.g. "1–1.5 hrs", "30–45 min"
+        image: string         # URL or local path (optional)
+        parking_fee: string   # e.g. "$12" (optional)
+        reservation_required: boolean  # Optional
+        reservation_url: string        # Optional
+        navigate_url: string  # Google Maps nav link
+        hours: string         # e.g. "Dawn to dusk" (optional)
+        kid_friendly: boolean # Optional
+        accessibility: string # Optional — wheelchair, stroller notes
+
+# ============================================================
+# ROUTES — map polylines connecting stops
+# Optional: if omitted, renderer draws straight lines between stops
+# ============================================================
+routes:
+  - day: integer              # Which day this route belongs to
+    color: string             # Hex color (usually matches day color)
+    width: number             # Line width in pixels
+    points:                   # Array of [lat, lng] waypoints
+      - [number, number]
+
+# ============================================================
+# THEME — optional visual customization
+# ============================================================
+theme:
+  font_family: string         # e.g. "DM Sans, sans-serif"
+  accent_color: string        # Primary accent, e.g. "#2d7a50"
+  map_style: string           # "terrain" | "satellite" | "topo" | "street"
+  dark_mode: boolean          # Default: false
+  hero_style: string          # "photo" | "gradient" | "minimal"
+
+# ============================================================
+# AGENT CONTEXT — metadata for the planning agent
+# Not rendered, but preserved for refinement iterations
+# ============================================================
+agent_context:
+  preferences:
+    pace: string              # "relaxed" | "moderate" | "packed"
+    budget: string            # "budget" | "mid-range" | "luxury"
+    accommodation_chain: string  # e.g. "Best Western" (loyalty program)
+    interests:                # Ranked list
+      - string                # e.g. "waterfalls", "beaches", "food", "hiking"
+    dietary: string           # Optional
+    mobility: string          # Optional constraints
+  constraints:
+    max_drive_per_day: string # e.g. "6 hours"
+    must_see:                 # Non-negotiable stops
+      - string
+    avoid:                    # Things to skip
+      - string
+    schedule_blocks:          # Work meetings, commitments
+      - day: integer
+        time: string
+        duration: string
+        note: string
+  iteration_log:              # Track changes for context
+    - date: string
+      change: string          # e.g. "Swapped Seaside for Astoria — Goonies house"

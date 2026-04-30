@@ -1,0 +1,588 @@
+# ============================================================
+# Oregon Spring Break 2026
+# Generated from a real 6-day family road trip
+# This serves as the reference example for TripKit
+# ============================================================
+
+trip:
+  title: "Oregon Spring Break 2026"
+  subtitle: "Redwoods · Coast · Waterfalls"
+  dates: "April 4–9, 2026"
+  total_days: 6
+  total_miles: "~1,600 mi"
+  total_stops: 22
+  travelers:
+    adults: 2
+    children: 2
+    ages: "Kids: 14, 17"
+  origin: "Folsom, CA"
+  vehicle: "SUV"
+
+days:
+  # ========== DAY 1 ==========
+  - number: 1
+    title: "Folsom → Redwood National Park"
+    date: "Saturday, April 4"
+    status: completed
+    color: "#2d7a50"
+
+    summary:
+      drive: "7–7.5 hrs"
+      hike: "2–3 hrs"
+      miles: "~350 mi"
+
+    weather:
+      high: "55°F"
+      low: "40°F"
+      sky: "Mostly cloudy, coastal fog"
+      rain_chance: "20%"
+      note: "Long drive day. Foggy in the redwoods — atmospheric and beautiful."
+
+    meals:
+      breakfast: "Home — early departure"
+      lunch: "Pack lunch or stop in Redding/Red Bluff area on I-5"
+      dinner: "Chart Room, Crescent City — harbor views, fresh seafood"
+
+    lodging:
+      name: "Best Western Plus Northwoods Inn"
+      location: "Crescent City, California"
+      price_estimate: "~$130/night"
+      confirmation: "XXXXX1234"
+      booked: true
+      lat: 41.756
+      lng: -124.201
+      notes: "Pool, free hot breakfast, 10 min to Stout Grove"
+      navigate_url: "https://www.google.com/maps/dir/?api=1&destination=Best+Western+Plus+Northwoods+Inn+Crescent+City+CA"
+
+    tips:
+      - "Leave Folsom by 8 AM to arrive with daylight for hikes."
+      - "Lady Bird Johnson Grove is a gentle 1.5-mile loop — perfect leg stretch after the drive."
+      - "Prairie Creek has Roosevelt elk right in the parking lot."
+
+    stops:
+      - name: "Lady Bird Johnson Grove"
+        lat: 41.316
+        lng: -124.007
+        type: hike
+        label: "Hike"
+        description: "Perfect first redwood experience. Gentle 1.5-mile loop through ancient old-growth. Misty, quiet, cathedral-like. Ideal leg-stretch after the long drive."
+        duration: "45 min–1 hr"
+        parking_fee: "Free (Redwood NP)"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=41.316,-124.007"
+
+      - name: "Prairie Creek Redwoods Visitor Center"
+        lat: 41.378
+        lng: -124.028
+        type: hike
+        label: "Hike"
+        description: "Lush fern-carpeted canyon trails. Roosevelt elk often grazing right in the parking lot — kids love it. Multiple short trail options."
+        duration: "1–1.5 hrs"
+        parking_fee: "$8 CA State Parks"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=41.378,-124.028"
+
+  # ========== DAY 2 ==========
+  - number: 2
+    title: "Stout Grove → Boardman → Florence"
+    date: "Sunday, April 5"
+    status: completed
+    color: "#2e7db5"
+
+    summary:
+      drive: "5.5–6 hrs"
+      hike: "1–2 hrs"
+      miles: "~230 mi"
+
+    weather:
+      high: "54°F"
+      low: "42°F"
+      sky: "Showers AM, clearing PM"
+      rain_chance: "90% morning, clearing"
+      note: "Rain in the redwoods is magical — wet bark turns deep red. Windbreaker and waterproof shoes essential."
+
+    meals:
+      breakfast: "BW free breakfast, or Good Harvest Cafe in Crescent City"
+      lunch: "Gold Beach — Spinner's Seafood (Rogue River salmon) or Barnacle Bistro"
+      dinner: "After Heceta Head sunset (~8 PM): Bridgewater Fish House in Florence Old Town"
+
+    lodging:
+      name: "Best Western Pier Point Inn"
+      location: "Florence, Oregon"
+      price_estimate: "~$120/night"
+      confirmation: "XXXXX5678"
+      booked: true
+      lat: 43.970
+      lng: -124.098
+      notes: "River views, pool, hot tub, cooked breakfast. Walking distance to Old Town."
+      navigate_url: "https://www.google.com/maps/dir/?api=1&destination=Best+Western+Pier+Point+Inn+Florence+OR"
+
+    alerts:
+      - "Fern Canyon is CLOSED — landslide has blocked Davison Road (confirmed April 2026)."
+
+    tips:
+      - "Stout Grove is 28 min from Crescent City via Howland Hill Road — narrow unpaved road through old-growth. Drive slow (15 mph) — the road itself is sightseeing."
+      - "Arrived Florence early — did Heceta Head Lighthouse at sunset (15 min drive). Spectacular!"
+
+    stops:
+      - name: "Stout Memorial Grove"
+        lat: 41.796
+        lng: -124.087
+        type: hike
+        label: "Hike"
+        description: "28-min drive from Crescent City via stunning Howland Hill Road (narrow, unpaved, through old-growth). Short walk to Earth's most impressive redwoods. Rain makes the bark glow deep red."
+        duration: "30–45 min + 28 min drive"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=41.796,-124.087"
+
+      - name: "Natural Bridges, Boardman"
+        lat: 42.150
+        lng: -124.348
+        type: scenic
+        label: "Scenic"
+        description: "Dramatic rock arches carved by the Pacific. One of Oregon's most photogenic spots. Quick pullover, massive visual payoff."
+        duration: "20–30 min"
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=42.150,-124.348"
+
+      - name: "Secret Beach"
+        lat: 42.139
+        lng: -124.354
+        type: hike
+        label: "Hike"
+        description: "Short but steep trail to a hidden cove with towering sea stacks. Feels like discovering a lost world. Watch footing on wet rocks."
+        duration: "30–45 min"
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=42.139,-124.354"
+
+      - name: "Gold Beach"
+        lat: 42.407
+        lng: -124.422
+        type: food
+        label: "Lunch"
+        description: "Charming fishing town at the Rogue River mouth. Fresh seafood lunch stop, then continue north to Florence."
+        duration: "45 min–1 hr"
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=Gold+Beach+OR"
+
+      - name: "Florence, OR"
+        lat: 43.983
+        lng: -124.100
+        type: city
+        label: "Stay"
+        description: "Arrived early — rested at hotel, then headed to Heceta Head for sunset."
+        duration: "Afternoon rest"
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=Florence+OR"
+
+      - name: "Heceta Head Lighthouse (sunset)"
+        lat: 44.137
+        lng: -124.128
+        type: scenic
+        label: "Sunset"
+        description: "15 min from Florence. One of America's most photographed lighthouses, 205 feet above the Pacific. Arrived 7 PM for golden hour. Sunset ~7:45 PM. Spectacular!"
+        duration: "45 min–1 hr"
+        parking_fee: "$12 OR State Parks"
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=44.137,-124.128"
+
+  # ========== DAY 3 ==========
+  - number: 3
+    title: "Florence → Coast Cruise → Cannon Beach → Astoria"
+    date: "Monday, April 6"
+    status: completed
+    color: "#2e7db5"
+
+    summary:
+      drive: "4–4.5 hrs"
+      hike: "1.5–2.5 hrs"
+      miles: "~195 mi"
+
+    weather:
+      high: "59°F"
+      low: "37°F"
+      sky: "Patchy fog AM, then sunny"
+      rain_chance: "Low"
+      note: "Best weather day of the trip — sunny and 59°F! Morning fog burned off by 8 AM."
+
+    meals:
+      breakfast: "BW Pier Point free breakfast"
+      lunch: "Pelican Brewing, Pacific City — oceanfront craft beer + burgers"
+      dinner: "Ecola Seafoods, Cannon Beach — legendary fish & chips, chowder"
+
+    lodging:
+      name: "Best Western Columbia River Waterfront Hotel"
+      location: "Astoria, Oregon"
+      price_estimate: "~$140/night"
+      confirmation: "XXXXX9012"
+      booked: true
+      lat: 46.189
+      lng: -123.831
+      notes: "Right on the Columbia River. Pool, hot tub, free breakfast. Steps from Riverwalk and sea lions."
+      navigate_url: "https://www.google.com/maps/dir/?api=1&destination=Best+Western+Columbia+River+Waterfront+Hotel+Astoria+OR"
+
+    alerts:
+      - "⏰ Dad had 7:30–8:30 PM work meeting. Arrived Astoria by 6:30, family hit pool, Dad took call from room."
+
+    tips:
+      - "Heceta Head done at sunset last night — skipped it this morning, gained 45 min for Cannon Beach."
+      - "Left Florence at 9:30 AM (family was tired). Skipped mid-coast stops, drove straight to Cannon Beach."
+      - "Also visited Goonies House and Astoria Column same evening — removed from Day 4."
+
+    stops:
+      - name: "Oregon Coast cruise"
+        lat: 44.750
+        lng: -124.060
+        type: scenic
+        label: "Scenic"
+        description: "Straight north from Florence on 101. Sunny day = incredible visibility. Quick pullovers at viewpoints."
+        duration: "Ongoing"
+
+      - name: "Cannon Beach & Haystack Rock"
+        lat: 45.892
+        lng: -123.962
+        type: scenic
+        label: "Scenic"
+        description: "Iconic 235-foot Haystack Rock. Tidepools, puffins, galleries, coffee. Parked at municipal lot (163 E Gower St) — everything walkable from there."
+        duration: "2–3 hrs"
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=163+E+Gower+St+Cannon+Beach+OR"
+
+      - name: "Ecola State Park"
+        lat: 45.924
+        lng: -123.973
+        type: hike
+        label: "Hike"
+        description: "Dramatic viewpoints over Cannon Beach and Tillamook Rock Lighthouse. Great late afternoon light."
+        duration: "1–1.5 hrs"
+        parking_fee: "$12 OR State Parks"
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=Ecola+State+Park+OR"
+
+  # ========== DAY 4 ==========
+  - number: 4
+    title: "Astoria → Columbia River Gorge → Troutdale"
+    date: "Tuesday, April 7"
+    status: completed
+    color: "#6b52c4"
+
+    summary:
+      drive: "2.5–3 hrs"
+      hike: "2–3 hrs"
+      miles: "~120 mi"
+
+    weather:
+      high: "78°F"
+      low: "49°F"
+      sky: "Breezy AM, partly sunny, warm"
+      rain_chance: "Low"
+      note: "Warmest day of the trip! Gorge was breezy with waterfall mist. Troutdale hit 78°F — perfect for evening outdoors."
+
+    meals:
+      breakfast: "BW free breakfast, then coffee at Astoria Coffee Co."
+      lunch: "Multnomah Falls Lodge cafeteria"
+      dinner: "McMenamins Edgefield — note: most areas are 21+ only. Not ideal for families with minors."
+
+    lodging:
+      name: "Best Western Plus Cascade Inn & Suites"
+      location: "Troutdale, Oregon"
+      price_estimate: "~$150/night"
+      confirmation: "XXXXX3456"
+      booked: true
+      lat: 45.539
+      lng: -122.390
+      notes: "Gateway to the Gorge. Pool, hot tub, sauna, free breakfast."
+      navigate_url: "https://www.google.com/maps/dir/?api=1&destination=Best+Western+Plus+Cascade+Inn+Suites+Troutdale+OR"
+
+    alerts:
+      - "⚠️ McMenamins Edgefield: most bars, soaking pool, and venues are 21+ only. NOT family-friendly for minors. Research age policies before recommending."
+
+    tips:
+      - "Goonies House and Astoria Column done previous evening — skipped in morning, slept in."
+      - "Did Multnomah-Wahkeena loop (big hike) + Latourell Falls. Skipped Horsetail Falls."
+      - "Multnomah Falls: NO timed-entry permit needed before May 22."
+
+    stops:
+      - name: "Multnomah Falls"
+        lat: 45.576
+        lng: -122.116
+        type: hike
+        label: "Hike"
+        description: "Oregon's tallest waterfall at 620 feet — roaring with spring snowmelt. Did the Multnomah-Wahkeena loop for the full experience. No permit needed before May 22."
+        duration: "2–3 hrs (loop)"
+        reservation_required: false
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=Multnomah+Falls+Oregon"
+
+      - name: "Latourell Falls"
+        lat: 45.537
+        lng: -122.218
+        type: hike
+        label: "Hike"
+        description: "Columnar basalt backdrop with electric spring greens. 2.4-mile loop trail. Quieter and more intimate than Multnomah."
+        duration: "1–1.5 hrs"
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=Latourell+Falls+Oregon"
+
+      - name: "McMenamins Edgefield"
+        lat: 45.539
+        lng: -122.412
+        type: activity
+        label: "Evening"
+        description: "74-acre converted estate — brewery, distillery, winery, restaurants. WARNING: most venues are 21+ only. Not suitable for families with minors."
+        duration: "2–3 hrs"
+        kid_friendly: false
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=McMenamins+Edgefield+Troutdale+Oregon"
+
+  # ========== DAY 5 ==========
+  - number: 5
+    title: "Silver Falls → Boulder Falls Inn"
+    date: "Wednesday, April 8"
+    status: completed
+    color: "#c48512"
+
+    summary:
+      drive: "2 hrs total"
+      hike: "3–4 hrs"
+      miles: "~110 mi"
+
+    weather:
+      high: "44°F"
+      low: "32°F"
+      sky: "Frost AM, then mostly sunny"
+      rain_chance: "10%"
+      note: "Cold start — 32°F with frost on trail early. Warmed to mid-40s. Waterfall spray is COLD at these temps. Layers + rain jacket essential."
+
+    meals:
+      breakfast: "BW free hot breakfast at Cascade Inn"
+      lunch: "South Falls Lodge cafe inside the park"
+      dinner: "1847 Bar & Grill at Boulder Falls Inn — Pacific NW cuisine overlooking Japanese garden"
+
+    lodging:
+      name: "Best Western PREMIER Boulder Falls Inn"
+      location: "Lebanon, Oregon"
+      price_estimate: "~$150/night"
+      confirmation: "XXXXX7890"
+      booked: true
+      lat: 44.530
+      lng: -122.907
+      notes: "Only 35 min from Silver Falls. Japanese garden with waterfalls, koi ponds, gazebos. On-site 1847 Bar & Grill. Heated outdoor pool + sauna. Premier-tier rooms with robes."
+      navigate_url: "https://www.google.com/maps/dir/?api=1&destination=Best+Western+Premier+Boulder+Falls+Inn+Lebanon+Oregon"
+
+    tips:
+      - "April = peak waterfall flow! Walk BEHIND 4 waterfalls on the Trail of Ten Falls."
+      - "Go clockwise from South Falls. 5-mile loop hits 7 falls in ~3 hrs."
+      - "Trail is muddy — waterproof shoes essential. $12 parking."
+      - "Shorter option: 2.5-mile loop (South Falls → Lower South → Lower North) still walks behind 2 waterfalls."
+
+    stops:
+      - name: "Silver Falls State Park"
+        lat: 44.877
+        lng: -122.654
+        type: hike
+        label: "Hike"
+        description: "Oregon's crown jewel — Trail of Ten Falls. Walk behind 177-foot South Falls through a carved basalt cave. 5-mile loop passes 7 thundering waterfalls at peak April flow."
+        duration: "3–4 hrs"
+        parking_fee: "$12"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=Silver+Falls+State+Park+South+Falls+Oregon"
+
+      - name: "Boulder Falls Inn"
+        lat: 44.530
+        lng: -122.907
+        type: activity
+        label: "Stay"
+        description: "BW Premier oasis — one-acre Japanese garden, koi ponds, waterfalls, walking paths. Robes in room, dinner at 1847 Bar & Grill overlooking the garden. Heated pool + sauna."
+        duration: "Evening"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=Best+Western+Premier+Boulder+Falls+Inn+Lebanon+Oregon"
+
+  # ========== DAY 6 ==========
+  - number: 6
+    title: "Lebanon → I-5 South → Home"
+    date: "Thursday, April 9"
+    status: completed
+    color: "#c44b25"
+
+    summary:
+      drive: "8.5–9 hrs"
+      hike: "—"
+      miles: "~510 mi"
+
+    weather:
+      high: "60–72°F (warming south)"
+      low: "38°F"
+      sky: "Clear to partly cloudy"
+      rain_chance: "Low"
+      note: "Beautiful drive through Willamette Valley, Rogue Valley, past Mt. Shasta. Steadily warming."
+
+    meals:
+      breakfast: "BW Premier free breakfast. Walk Japanese garden one more time."
+      lunch: "Ashland, OR — Standing Stone Brewing or Greenleaf Restaurant"
+      snack: "Mt. Shasta City — Seven Suns Coffee & Cafe"
+
+    lodging:
+      name: "Home"
+      location: "Folsom, CA"
+      booked: true
+      lat: 38.678
+      lng: -121.176
+      notes: "Arrive ~7–9 PM depending on stops."
+
+    tips:
+      - "15 min from hotel to I-5 at Albany, then straight south."
+      - "Ashland is a gem — walk the charming downtown, 45 min lunch."
+      - "Mt. Shasta views from I-5 are spectacular on clear April days."
+
+    stops:
+      - name: "Ashland, OR"
+        lat: 42.195
+        lng: -122.710
+        type: food
+        label: "Lunch"
+        description: "Home of the Oregon Shakespeare Festival. Charming downtown with great restaurants. About 3.5 hrs from Lebanon via I-5."
+        duration: "45 min–1 hr"
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=Downtown+Ashland+OR"
+
+      - name: "Mt. Shasta views"
+        lat: 41.310
+        lng: -122.310
+        type: scenic
+        label: "Scenic"
+        description: "14,179-foot stratovolcano visible for hours along I-5. Stop at the vista point for photos. Snow-capped in April."
+        duration: "10–15 min"
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=41.310,-122.310"
+
+      - name: "Folsom — Home!"
+        lat: 38.678
+        lng: -121.176
+        type: city
+        label: "Finish"
+        description: "1,600 miles of redwoods, coast, waterfalls, Japanese gardens, and memories."
+
+# ============================================================
+# ROUTES — map polylines
+# ============================================================
+routes:
+  # Day 1: Folsom → Redwoods → Crescent City
+  - day: 1
+    color: "#2d7a50"
+    width: 4
+    points:
+      - [38.678, -121.176]
+      - [40.589, -122.376]
+      - [41.316, -124.007]
+      - [41.756, -124.201]
+
+  # Day 2: Crescent City → Boardman → Florence
+  - day: 2
+    color: "#2e7db5"
+    width: 4
+    points:
+      - [41.796, -124.087]
+      - [42.15, -124.35]
+      - [42.407, -124.42]
+      - [43.0, -124.40]
+      - [43.8, -124.10]
+      - [43.983, -124.100]
+
+  # Day 3: Florence → Coast → Cannon Beach → Astoria
+  - day: 3
+    color: "#2e7db5"
+    width: 4
+    points:
+      - [43.983, -124.100]
+      - [44.6, -124.06]
+      - [45.5, -123.98]
+      - [45.892, -123.962]
+      - [46.189, -123.831]
+
+  # Day 4: Astoria → Gorge → Troutdale
+  - day: 4
+    color: "#6b52c4"
+    width: 4
+    points:
+      - [46.189, -123.831]
+      - [46.1, -123.3]
+      - [45.9, -122.8]
+      - [45.576, -122.116]
+      - [45.539, -122.412]
+
+  # Day 5: Troutdale → Silver Falls → Lebanon
+  - day: 5
+    color: "#c48512"
+    width: 3.5
+    points:
+      - [45.539, -122.412]
+      - [45.0, -122.6]
+      - [44.877, -122.654]
+      - [44.530, -122.907]
+
+  # Day 6: Lebanon → I-5 → Home
+  - day: 6
+    color: "#c44b25"
+    width: 3.5
+    points:
+      - [44.530, -122.907]
+      - [44.63, -123.1]
+      - [43.2, -123.3]
+      - [42.195, -122.710]
+      - [41.310, -122.310]
+      - [40.589, -122.376]
+      - [39.5, -122.0]
+      - [38.678, -121.176]
+
+# ============================================================
+# THEME
+# ============================================================
+theme:
+  font_family: "DM Sans, system-ui, sans-serif"
+  accent_color: "#2d7a50"
+  map_style: "terrain"
+  dark_mode: false
+  hero_style: "photo"
+
+# ============================================================
+# AGENT CONTEXT
+# ============================================================
+agent_context:
+  preferences:
+    pace: moderate
+    budget: mid-range
+    accommodation_chain: "Best Western (Rewards member)"
+    interests:
+      - waterfalls
+      - coastal scenery
+      - redwoods
+      - hiking
+      - food
+      - unique lodging
+    mobility: "All family members fully mobile, kids can handle 5-mile hikes"
+  constraints:
+    max_drive_per_day: "6 hours preferred, 8 max"
+    must_see:
+      - "Redwoods (old-growth)"
+      - "Oregon Coast"
+      - "Multnomah Falls"
+      - "Silver Falls (walk behind waterfalls)"
+    avoid:
+      - "Seattle traffic"
+      - "Crater Lake (Rim Drive closed in April)"
+      - "North Cascades Highway (closed — rockslide)"
+    schedule_blocks:
+      - day: 3
+        time: "7:30 PM"
+        duration: "60 min"
+        note: "Dad's work meeting — need hotel WiFi by 7:25 PM"
+  iteration_log:
+    - date: "2026-03-15"
+      change: "Cut Washington state (North Cascades closed, Seattle adds 14-hr return day)"
+    - date: "2026-03-18"
+      change: "Added Silver Falls State Park — peak April waterfall flow"
+    - date: "2026-03-20"
+      change: "Pushed Day 2 to Florence instead of Gold Beach — balances driving"
+    - date: "2026-03-20"
+      change: "Swapped Seaside for Astoria — Goonies house, Astoria Column, better character"
+    - date: "2026-03-21"
+      change: "Swapped Portland downtown for Troutdale — McMenamins Edgefield next door, skip traffic"
+    - date: "2026-03-21"
+      change: "Swapped Eugene for Boulder Falls Inn — 35 min from Silver Falls vs 1.5 hrs, Japanese garden"
+    - date: "2026-04-05"
+      change: "Moved Heceta Head to Day 2 sunset — family arrived Florence early"
+    - date: "2026-04-06"
+      change: "Late start Day 3 (9:30 AM) — skipped mid-coast stops, straight to Cannon Beach"
+    - date: "2026-04-06"
+      change: "Did Goonies House + Astoria Column on Day 3 evening — removed from Day 4"
+    - date: "2026-04-07"
+      change: "McMenamins Edgefield: most areas 21+ only — NOT family-friendly. Lesson learned."
