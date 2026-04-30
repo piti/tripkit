@@ -2,7 +2,7 @@
 
 All notable changes to TripKit are documented here. Versioning follows [SemVer](https://semver.org/).
 
-## [1.1.0] — 2026-04-30
+## [1.2.0] — 2026-04-30
 
 ### Added
 - **`tripkit validate <trip.yaml>`** — schema validator that checks required fields, lat/lng ranges, valid stop types, hex colors, day numbering (sequential, status enum), `trip.total_days` / `trip.total_stops` consistency, optional routes structure, and theme fields. Warnings are advisory; errors block render. Pre-render validation is automatic; pass `--no-validate` to bypass. Includes a warning when any consecutive-day jump (Day N's lodging-or-last-stop → Day N+1's first stop) exceeds 250 mi without an explicit `routes[]` entry.
