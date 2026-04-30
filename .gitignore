@@ -5,3 +5,7 @@ node_modules/
 # Generated HTML files (output of convert.js)
 # Keep the renderer template, exclude generated trip HTMLs
 examples/*.html
+
+# Private context — not for public repo
+CLAUDE.md
+.planning/
