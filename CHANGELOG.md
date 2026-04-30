@@ -6,6 +6,10 @@ All notable changes to TripKit are documented here. Versioning follows [SemVer](
 
 ### Added
 - GitHub Actions CI: runs `npm test` (validator + skill-coverage gate) and validates every YAML in `examples/` on Node 18/20/22 for every push and PR to `main`.
+- **Claude Code skill bundle.** `agent/SKILL.md` now ships with `name`/`description` YAML frontmatter so it discovers as a proper Claude Code skill. New `npx tripkit install-skill` command copies the skill to `~/.claude/skills/tripkit/` (or `--project` for `.claude/skills/`); after install, invoke with `/skills tripkit`.
+
+### Changed
+- Renamed `agent/AGENT-SKILL.md` → `agent/SKILL.md` to match Claude Code's skill convention. The body is unchanged and still agent-agnostic; the new frontmatter is ignored by non-Claude tooling.
 
 ## [1.2.0] — 2026-04-30
 

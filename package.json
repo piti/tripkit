@@ -17,7 +17,7 @@
     "examples/nyc-long-weekend-2026.yaml",
     "examples/new-england-fall-2026.yaml",
     "agent/questionnaire.yaml",
-    "agent/AGENT-SKILL.md",
+    "agent/SKILL.md",
     "README.md",
     "CHANGELOG.md",
     "LICENSE"

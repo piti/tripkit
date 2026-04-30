@@ -48,7 +48,7 @@ git push --follow-tags
 We need React components that consume the same YAML/JSON schema. See `renderers/react/` for the placeholder.
 
 ### Improve the Agent Skill
-The agent system prompt is at `agent/AGENT-SKILL.md`. If you've used TripKit with an AI agent and learned something, add it to the lessons learned section.
+The agent system prompt is at `agent/SKILL.md` (also installable as a Claude Code skill — see README). If you've used TripKit with an AI agent and learned something, add it to the lessons learned section.
 
 ## Guidelines
 - Keep the schema backward-compatible — new fields should be optional

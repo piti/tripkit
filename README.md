@@ -78,7 +78,11 @@ It checks required fields, lat/lng ranges, valid stop types, hex colors, day num
 ### Option 3: With an AI Agent (everyone)
 
 1. Start a conversation with your preferred AI agent (Claude recommended)
-2. Share the `agent/AGENT-SKILL.md` as context
+2. Share the `agent/SKILL.md` as context — or, if you're using **Claude Code**, install it as a skill (one-time):
+   ```bash
+   npx tripkit install-skill          # installs to ~/.claude/skills/tripkit/
+   ```
+   then invoke with `/skills tripkit` in any conversation.
 3. Tell it about your trip: _"I'm planning a 5-day road trip through the Pacific Northwest with my family..."_
 4. The agent uses the questionnaire to gather details, researches routes/hotels/restaurants, and generates a TripKit YAML file
 5. Convert to HTML with `npx tripkit your-trip.yaml`, or ask the agent to render it directly
@@ -108,7 +112,7 @@ tripkit/
 │       └── (coming soon)          # React component library
 ├── agent/
 │   ├── questionnaire.yaml       # Elicitation template
-│   └── AGENT-SKILL.md           # System prompt for AI agents
+│   └── SKILL.md                 # System prompt + Claude Code skill bundle
 ├── docs/
 │   └── screenshot.png
 ├── convert.js                   # YAML → HTML CLI tool

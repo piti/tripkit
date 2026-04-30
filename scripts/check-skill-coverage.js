@@ -11,10 +11,10 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
-const skill = fs.readFileSync(path.join(ROOT, 'agent', 'AGENT-SKILL.md'), 'utf8');
+const skill = fs.readFileSync(path.join(ROOT, 'agent', 'SKILL.md'), 'utf8');
 
 // Hand-curated list of fields the agent must know about. When you add a renderer-
-// meaningful field, add it here and to AGENT-SKILL.md in the same change.
+// meaningful field, add it here and to agent/SKILL.md in the same change.
 const REQUIRED_FIELDS = [
   // trip
   'trip.title', 'trip.dates', 'trip.total_days', 'trip.total_stops',
@@ -55,12 +55,12 @@ for (const field of REQUIRED_FIELDS) {
 }
 
 if (missing.length === 0) {
-  console.log(`✓ AGENT-SKILL.md covers all ${REQUIRED_FIELDS.length} required fields`);
+  console.log(`✓ agent/SKILL.md covers all ${REQUIRED_FIELDS.length} required fields`);
   process.exit(0);
 }
 
-console.error(`✖ AGENT-SKILL.md is missing references to ${missing.length} required field(s):`);
+console.error(`✖ agent/SKILL.md is missing references to ${missing.length} required field(s):`);
 for (const f of missing) console.error(`  - ${f}`);
 console.error('');
-console.error('Either add a mention to agent/AGENT-SKILL.md, or remove it from REQUIRED_FIELDS in this script if the field is no longer renderer-meaningful.');
+console.error('Either add a mention to agent/agent/SKILL.md, or remove it from REQUIRED_FIELDS in this script if the field is no longer renderer-meaningful.');
 process.exit(1);

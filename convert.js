@@ -29,6 +29,9 @@ TripKit — AI-friendly trip planning toolkit
 Usage:
   ${invokedAs} <trip.yaml> [output.html]    Render YAML to interactive HTML
   ${invokedAs} validate <trip.yaml>         Check a trip YAML for schema errors
+  ${invokedAs} install-skill [--project]    Install the agent skill for Claude Code
+                                            (default: ~/.claude/skills/tripkit/;
+                                             --project: ./.claude/skills/tripkit/)
 
 Flags:
   -h, --help       Show this help
@@ -74,6 +77,23 @@ function reportFindings(errors, warnings) {
   warnings.forEach(({ path: p, message }) => {
     console.error(`  ${c.yellow('⚠')} ${c.bold(p)} — ${message}`);
   });
+}
+
+// === SUBCOMMAND: install-skill ===
+if (args[0] === 'install-skill') {
+  const projectScope = args.includes('--project');
+  const dest = projectScope
+    ? path.join(process.cwd(), '.claude', 'skills', 'tripkit')
+    : path.join(require('os').homedir(), '.claude', 'skills', 'tripkit');
+  const src = path.join(__dirname, 'agent');
+
+  fs.mkdirSync(dest, { recursive: true });
+  for (const f of fs.readdirSync(src)) {
+    fs.copyFileSync(path.join(src, f), path.join(dest, f));
+  }
+  console.log(c.green('✓') + ` Installed TripKit skill to ${dest}`);
+  console.log(c.dim(`  Invoke in Claude Code with: /skills tripkit`));
+  process.exit(0);
 }
 
 // === SUBCOMMAND: validate ===

@@ -1,6 +1,11 @@
+---
+name: tripkit
+description: Plan road trips and itineraries that render as interactive map visualizations. Produces YAML conforming to the TripKit schema, validates it with `tripkit validate`, and renders to a self-contained HTML file via `npx tripkit`.
+---
+
 # TripKit Agent Skill
 
-System prompt / skill for AI agents that plan trips using the TripKit framework. Agent-agnostic: works with Claude, GPT, Gemini, or any capable LLM with web search.
+System prompt / skill for AI agents that plan trips using the TripKit framework. The YAML frontmatter above is for Claude Code's `/skills` discovery; the body itself is agent-agnostic — works with Claude, GPT, Gemini, or any capable LLM with web search.
 
 ## Role
 
