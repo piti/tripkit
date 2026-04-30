@@ -16,6 +16,8 @@ trip:
     children: 2
     ages: "Kids: 14, 17"
   origin: "Folsom, CA"
+  origin_lat: 38.678
+  origin_lng: -121.176
   vehicle: "SUV"
 
 days:

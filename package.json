@@ -1,6 +1,6 @@
 {
   "name": "tripkit",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Open-source framework for AI-assisted trip planning with beautiful interactive visualizers",
   "main": "convert.js",
   "bin": {
@@ -8,9 +8,14 @@
   },
   "files": [
     "convert.js",
+    "validate.js",
+    "scripts/check-skill-coverage.js",
     "renderers/html/tripkit-renderer.html",
     "schema/tripkit.schema.yaml",
     "examples/oregon-spring-2026.yaml",
+    "examples/southwest-parks-2026.yaml",
+    "examples/nyc-long-weekend-2026.yaml",
+    "examples/new-england-fall-2026.yaml",
     "agent/questionnaire.yaml",
     "agent/AGENT-SKILL.md",
     "README.md",
@@ -20,7 +25,7 @@
   "scripts": {
     "convert": "node convert.js",
     "example": "node convert.js examples/oregon-spring-2026.yaml examples/oregon-spring-2026.html",
-    "test": "node convert.js examples/oregon-spring-2026.yaml /tmp/tripkit-test.html && test -s /tmp/tripkit-test.html && echo 'OK'",
+    "test": "node convert.js examples/oregon-spring-2026.yaml /tmp/tripkit-test.html && test -s /tmp/tripkit-test.html && node scripts/check-skill-coverage.js && echo 'OK'",
     "prepublishOnly": "npm test"
   },
   "keywords": [

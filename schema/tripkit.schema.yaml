@@ -18,6 +18,10 @@ trip:
     children: integer
     ages: string              # e.g. "Kids: 14, 17"
   origin: string              # e.g. "Folsom, CA"
+  origin_lat: number          # Optional — if set with origin_lng, renders a "Start" pin on the map
+  origin_lng: number
+  destination_lat: number     # Optional — if absent, defaults to origin coords (round trip)
+  destination_lng: number     # Set explicitly only if the trip ends somewhere different from where it started
   vehicle: string             # e.g. "SUV", "Sedan", "RV"
 
 # ============================================================
@@ -102,6 +106,9 @@ theme:
   map_style: string           # "terrain" | "satellite" | "topo" | "street"
   dark_mode: boolean          # Default: false
   hero_style: string          # "photo" | "gradient" | "minimal"
+  hotel_label: string         # Optional 1–4 char label for hotel markers (e.g. "MAR", "BW", "INN").
+                              # Falls back to first 3 chars of agent_context.preferences.accommodation_chain,
+                              # then 🏨 emoji.
 
 # ============================================================
 # AGENT CONTEXT — metadata for the planning agent

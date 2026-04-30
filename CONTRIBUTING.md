@@ -26,6 +26,8 @@ We welcome contributions! Here's how to get involved.
 ### Submit an Example Trip
 The easiest way to contribute! Plan a trip using the schema, submit your YAML as a PR to `examples/`. Anonymize any personal info (confirmation numbers, names).
 
+**Routes convention:** for road-trip examples, include an explicit `routes:` block with 4–6 hand-curated `[lat, lng]` waypoints per day that follow real roads (interstates, scenic highways). The auto-fallback works fine but produces straight lines between stops. See `oregon-spring-2026.yaml` for the canonical pattern. City trips with no driving (see `nyc-long-weekend-2026.yaml`) can omit `routes:` and rely on auto-generation.
+
 ### Improve the Renderer
 The HTML renderer is at `renderers/html/tripkit-renderer.html`. Test changes with:
 ```bash

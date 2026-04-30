@@ -1,0 +1,471 @@
+# ============================================================
+# New England Fall Foliage 2026
+# 5-day VT/NH loop from Boston — leaf-peeping, covered bridges,
+# small-town inns. Showcases: scenic drives, food/shopping mix,
+# regional inns (not a chain).
+# ============================================================
+
+trip:
+  title: "New England Fall Foliage 2026"
+  subtitle: "Vermont · White Mountains · Covered Bridges"
+  dates: "October 4–8, 2026"
+  total_days: 5
+  total_miles: "~700 mi"
+  total_stops: 14
+  travelers:
+    adults: 2
+    children: 0
+  origin: "Boston, MA (fly in / fly out)"
+  origin_lat: 42.360
+  origin_lng: -71.059
+  vehicle: "Rental sedan"
+
+days:
+  # ========== DAY 1 ==========
+  - number: 1
+    title: "Boston → North Conway, NH"
+    date: "Sunday, October 4"
+    status: upcoming
+    color: "#c8542a"
+
+    summary:
+      drive: "3.5 hrs"
+      hike: "30 min"
+      miles: "~165 mi"
+
+    weather:
+      high: "62°F"
+      low: "44°F"
+      sky: "Sunny, crisp"
+      rain_chance: "10%"
+      note: "Peak foliage in the White Mountains — colors are 7–10 days early this year per the VT/NH foliage tracker."
+
+    meals:
+      breakfast: "Tatte Bakery, Boston — quick pre-drive"
+      lunch: "Polly's Pancake Parlor, Sugar Hill NH — 1938 farm restaurant, real maple syrup tap"
+      dinner: "Moat Mountain Smokehouse, North Conway — local brewery, ribs"
+
+    lodging:
+      name: "White Mountain Hotel & Resort"
+      location: "North Conway, NH"
+      price_estimate: "~$240/night"
+      confirmation: "XXXXX1234"
+      booked: true
+      lat: 44.0436
+      lng: -71.1364
+      notes: "View of Cathedral Ledge from the lobby. Pool, hot tub, fire pit. Walk to Diana's Baths trail."
+      navigate_url: "https://www.google.com/maps/dir/?api=1&destination=White+Mountain+Hotel+North+Conway+NH"
+
+    tips:
+      - "Drive Kancamagus Highway (Rt 112) west-to-east — mountain views unfold around each bend."
+      - "Polly's needs a 30+ min wait Sundays — call ahead and they'll add you to the list while you drive."
+      - "Stop at Sabbaday Falls — 0.6 mile boardwalk, perfect 30-min leg stretch."
+
+    stops:
+      - name: "Polly's Pancake Parlor"
+        lat: 44.2006
+        lng: -71.7820
+        type: food
+        label: "Lunch"
+        description: "Family-run since 1938. Pancakes are made from grain ground that morning. Sit by the window facing Mt. Washington."
+        duration: "1 hr"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=44.2006,-71.7820"
+
+      - name: "Sabbaday Falls (Kancamagus Hwy)"
+        lat: 43.9947
+        lng: -71.4006
+        type: hike
+        label: "Stretch"
+        description: "Easy 0.6-mile boardwalk to a 3-tier waterfall in a granite gorge. Always cool down here, even in October."
+        duration: "30 min"
+        parking_fee: "$5 White Mtn NF day pass"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=43.9947,-71.4006"
+
+      - name: "Cathedral Ledge"
+        lat: 44.0681
+        lng: -71.1681
+        type: scenic
+        label: "Sunset"
+        description: "Drive to the top — short paved road. Cliff overlook 700 ft above Echo Lake. Panorama from Mt. Washington to the Whites. 15 min before sunset, perfect light."
+        duration: "30 min"
+        parking_fee: "Free"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=44.0681,-71.1681"
+
+  # ========== DAY 2 ==========
+  - number: 2
+    title: "White Mountains full day"
+    date: "Monday, October 5"
+    status: upcoming
+    color: "#b8401e"
+
+    summary:
+      drive: "1.5 hrs"
+      hike: "2–3 hrs"
+      miles: "~60 mi"
+
+    weather:
+      high: "58°F"
+      low: "40°F"
+      sky: "Mostly sunny, gusty above tree line"
+      rain_chance: "20%"
+      note: "Mt. Washington summit is famously the worst weather in the world — wind speeds can hit 100 mph year-round. Check the summit forecast before going up."
+
+    meals:
+      breakfast: "Hotel breakfast"
+      lunch: "Mt. Washington Cog Railway snack bar at the summit"
+      dinner: "Stonehurst Manor, North Conway — wood-fired pizza in a Gilded Age mansion"
+
+    lodging:
+      name: "White Mountain Hotel & Resort"
+      location: "North Conway, NH"
+      price_estimate: "~$240/night"
+      confirmation: "XXXXX1234"
+      booked: true
+      lat: 44.0436
+      lng: -71.1364
+      notes: "Second night — same room"
+
+    alerts:
+      - "🚂 Mt. Washington Cog Railway sells out 2–3 weeks ahead in October. Book the 9 AM departure for clearest summit views."
+
+    tips:
+      - "Cog Railway > Auto Road for kids and first-timers. 3 hrs round-trip vs 4+ hrs and stressful."
+      - "Crawford Notch State Park is the most underrated stop in NH — pull over at Mt. Willard trailhead."
+      - "Flume Gorge is a 2-mile loop, gentle, and absurdly photogenic. Tiered boardwalks through a slot."
+
+    stops:
+      - name: "Mt. Washington Cog Railway"
+        lat: 44.2705
+        lng: -71.3486
+        type: activity
+        label: "Summit"
+        description: "Steam-and-biodiesel cog railway up the steepest railroad track in the world. 1 hr each way + 1 hr at the summit. Bring layers — summit is often 40°F colder than base."
+        duration: "3 hrs"
+        reservation_required: true
+        reservation_url: "https://www.thecog.com"
+        parking_fee: "$10 base parking, $84 ticket"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=44.2705,-71.3486"
+
+      - name: "Crawford Notch — Mt. Willard"
+        lat: 44.2152
+        lng: -71.4045
+        type: hike
+        label: "Quick hike"
+        description: "3.2-mile out-and-back, 900 ft climb, 2 hrs. Easy grade on an old carriage road. Cliff-edge view straight down the notch — best foliage shot in NH."
+        duration: "2 hrs"
+        parking_fee: "Free with NH State Parks pass"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=44.2152,-71.4045"
+
+      - name: "Flume Gorge"
+        lat: 44.0976
+        lng: -71.6814
+        type: scenic
+        label: "Walk"
+        description: "2-mile loop through a 90-ft-deep granite slot canyon. Wooden boardwalks, waterfalls, a 100-yr-old covered bridge at the end. Buy timed tickets online."
+        duration: "1.5 hrs"
+        reservation_required: true
+        reservation_url: "https://www.nhstateparks.org/visit/state-parks/franconia-notch-state-park"
+        parking_fee: "$18 adult"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=44.0976,-71.6814"
+
+  # ========== DAY 3 ==========
+  - number: 3
+    title: "NH → Stowe, VT"
+    date: "Tuesday, October 6"
+    status: upcoming
+    color: "#d97f3a"
+
+    summary:
+      drive: "3 hrs"
+      hike: "1 hr"
+      miles: "~135 mi"
+
+    weather:
+      high: "60°F"
+      low: "42°F"
+      sky: "Partly cloudy"
+      rain_chance: "30%"
+      note: "Vermont is ~3 days behind NH on peak — colors should be perfect today."
+
+    meals:
+      breakfast: "Hotel breakfast"
+      lunch: "Hill Farmstead Brewery (Greensboro Bend) — by appointment, world-class beer in a cow pasture"
+      dinner: "Doc Ponds, Stowe — local sourcing, 25 drafts, the burger is famous"
+
+    lodging:
+      name: "Lodge at Spruce Peak"
+      location: "Stowe, VT"
+      price_estimate: "~$380/night"
+      confirmation: "XXXXX5678"
+      booked: true
+      lat: 44.5314
+      lng: -72.7818
+      notes: "Slopeside on Mt. Mansfield. Heated outdoor pool, fire pits, gondola from the lobby."
+      navigate_url: "https://www.google.com/maps/dir/?api=1&destination=Lodge+at+Spruce+Peak+Stowe+VT"
+
+    tips:
+      - "Lake Willoughby is a glacial fjord that looks like Norway dropped into Vermont. Worth the 30-min detour off I-91."
+      - "Hill Farmstead requires reservations and they sell out a week ahead — book Monday for Tuesday."
+      - "Stowe Recreation Path is a 5.5-mile flat paved trail along the river — perfect evening stroll from the hotel."
+
+    stops:
+      - name: "Lake Willoughby"
+        lat: 44.7389
+        lng: -72.0119
+        type: scenic
+        label: "Fjord"
+        description: "5-mile glacial lake hemmed in by 1,000-ft cliffs (Mt. Pisgah and Mt. Hor). Pull over at the south beach for the postcard shot."
+        duration: "30 min"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=44.7389,-72.0119"
+
+      - name: "Trapp Family Lodge"
+        lat: 44.5118
+        lng: -72.7088
+        type: scenic
+        label: "Tour"
+        description: "Yes, that Trapp family. Austrian-style lodge on 2,500 acres run by the von Trapp grandchildren. Brewery on-site, Linzer torte at the bakery."
+        duration: "1.5 hrs"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=44.5118,-72.7088"
+
+      - name: "Stowe Village"
+        lat: 44.4654
+        lng: -72.6873
+        type: shopping
+        label: "Browse"
+        description: "Compact 2-block downtown. Shaw's General Store (since 1895), Stowe Mercantile for maple syrup, Black Cap Coffee for an afternoon refill."
+        duration: "1 hr"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=44.4654,-72.6873"
+
+  # ========== DAY 4 ==========
+  - number: 4
+    title: "Stowe → Woodstock, VT"
+    date: "Wednesday, October 7"
+    status: upcoming
+    color: "#a85525"
+
+    summary:
+      drive: "2 hrs"
+      hike: "1 hr"
+      miles: "~95 mi"
+
+    weather:
+      high: "63°F"
+      low: "44°F"
+      sky: "Sunny — peak day for photos"
+      rain_chance: "5%"
+      note: "Drive south on Rt 100 — most scenic road in Vermont, follows the spine of the Green Mountains."
+
+    meals:
+      breakfast: "Hotel breakfast or PK Coffee, Stowe"
+      lunch: "Worthy Burger, South Royalton — grass-fed beef, train-car dining room"
+      dinner: "Mangalitsa, Woodstock — farm-to-table, the chef raises his own pigs"
+
+    lodging:
+      name: "Woodstock Inn & Resort"
+      location: "Woodstock, VT"
+      price_estimate: "~$420/night"
+      confirmation: "XXXXX9012"
+      booked: true
+      lat: 43.6233
+      lng: -72.5183
+      notes: "Owned by the Rockefellers since the '60s. Full spa, two golf courses, a brewery in the basement."
+      navigate_url: "https://www.google.com/maps/dir/?api=1&destination=Woodstock+Inn+Woodstock+VT"
+
+    tips:
+      - "Smugglers' Notch (Rt 108) closes for winter Oct 15ish — drive it now or it's a 90-min detour."
+      - "Quechee Gorge has an upper viewpoint right off Rt 4 (free, 5 min) — skip the gift shops."
+      - "Sleepy Hollow Farm (Pomfret) is the most-photographed spot in Vermont. Park considerately, walk in, take 5 photos, leave."
+
+    stops:
+      - name: "Smugglers' Notch"
+        lat: 44.5587
+        lng: -72.7850
+        type: scenic
+        label: "Drive"
+        description: "Narrow pass between Mt. Mansfield and Sterling Peak — boulders the size of houses on either side of a single-lane road. Pullouts for hiking and photos."
+        duration: "30–45 min"
+        parking_fee: "Free"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=44.5587,-72.7850"
+
+      - name: "Quechee Gorge"
+        lat: 43.6398
+        lng: -72.4083
+        type: scenic
+        label: "Photo stop"
+        description: "Vermont's Little Grand Canyon. 165-ft drop, 10-min walk along the rim from the highway bridge."
+        duration: "30 min"
+        parking_fee: "Free"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=43.6398,-72.4083"
+
+      - name: "Sleepy Hollow Farm"
+        lat: 43.7314
+        lng: -72.5097
+        type: scenic
+        label: "Photo"
+        description: "Cliché Vermont in one frame — red barn, white farmhouse, sugar maples, dirt road. Be respectful: this is private property, photograph from the road only."
+        duration: "15 min"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=43.7314,-72.5097"
+
+      - name: "Woodstock village green"
+        lat: 43.6242
+        lng: -72.5181
+        type: shopping
+        label: "Browse"
+        description: "Voted prettiest small town in America by approximately every magazine. Wander the green, cross the covered bridge, browse F. H. Gillingham (1886)."
+        duration: "1.5 hrs"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=43.6242,-72.5181"
+
+  # ========== DAY 5 ==========
+  - number: 5
+    title: "Woodstock → Boston (fly out)"
+    date: "Thursday, October 8"
+    status: upcoming
+    color: "#7a3818"
+
+    summary:
+      drive: "2.5 hrs"
+      hike: "30 min"
+      miles: "~155 mi"
+
+    weather:
+      high: "65°F"
+      low: "46°F"
+      sky: "Sunny"
+      rain_chance: "5%"
+      note: "Easy drive day. Walden Pond is a nice palate-cleanser before BOS."
+
+    meals:
+      breakfast: "Mon Vert Cafe, Woodstock — sit on the porch"
+      lunch: "Concord Cheese Shop — sandwich + pond picnic"
+      dinner: "BOS terminal — your call"
+
+    lodging:
+      name: "Home"
+      location: "Returning home"
+      booked: true
+      lat: 42.3601
+      lng: -71.0589
+      notes: "Flight out of BOS — return rental 2 hrs before"
+
+    tips:
+      - "If you have an extra hour, stop at Sugar Hill Sampler (Lyme NH) for one last bottle of maple."
+      - "Walden Pond has a 1.7-mile loop trail and a replica of Thoreau's cabin — 30-min stop."
+      - "BOS rental return is at Logan; airtrain to terminal is fast."
+
+    stops:
+      - name: "Walden Pond"
+        lat: 42.4380
+        lng: -71.3387
+        type: scenic
+        label: "Pilgrimage"
+        description: "Yes, that Walden Pond. 1.7-mile loop trail, replica cabin, swimming beach. 30 min in autumn light is enough to make you want to re-read Thoreau."
+        duration: "45 min–1 hr"
+        parking_fee: "$15 non-resident parking"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=42.4380,-71.3387"
+
+# ============================================================
+# ROUTES — follow I-93, Kancamagus Hwy (Rt 112), I-91, Rt 100,
+# Rt 4. Hand-curated to keep the polylines on real roads.
+# ============================================================
+routes:
+  # Day 1: Boston → Lake Winnipesaukee → Sugar Hill → Kancamagus → North Conway
+  - day: 1
+    color: "#c8542a"
+    width: 4
+    points:
+      - [42.360, -71.059]
+      - [43.473, -71.555]
+      - [44.201, -71.782]
+      - [43.995, -71.401]
+      - [44.068, -71.168]
+      - [44.044, -71.136]
+
+  # Day 2: North Conway → Cog Railway → Crawford Notch → Flume → North Conway
+  - day: 2
+    color: "#b8401e"
+    width: 4
+    points:
+      - [44.044, -71.136]
+      - [44.270, -71.349]
+      - [44.215, -71.404]
+      - [44.098, -71.681]
+      - [44.044, -71.136]
+
+  # Day 3: North Conway → Littleton → Lake Willoughby → Stowe
+  - day: 3
+    color: "#d97f3a"
+    width: 4
+    points:
+      - [44.044, -71.136]
+      - [44.305, -71.770]
+      - [44.739, -72.012]
+      - [44.512, -72.709]
+      - [44.465, -72.687]
+      - [44.531, -72.782]
+
+  # Day 4: Stowe → Smugglers' Notch → Montpelier → Quechee → Woodstock
+  - day: 4
+    color: "#a85525"
+    width: 4
+    points:
+      - [44.531, -72.782]
+      - [44.559, -72.785]
+      - [44.260, -72.575]
+      - [43.640, -72.408]
+      - [43.731, -72.510]
+      - [43.624, -72.518]
+
+  # Day 5: Woodstock → Concord NH → Walden Pond → Boston
+  - day: 5
+    color: "#7a3818"
+    width: 4
+    points:
+      - [43.624, -72.518]
+      - [43.208, -71.538]
+      - [42.438, -71.339]
+      - [42.360, -71.059]
+
+theme:
+  font_family: "Instrument Serif, Georgia, serif"
+  accent_color: "#c8542a"
+  map_style: "terrain"
+
+agent_context:
+  preferences:
+    pace: "relaxed"
+    budget: "luxury"
+    accommodation_chain: ""
+    interests:
+      - "fall foliage"
+      - "small towns"
+      - "farm-to-table food"
+      - "covered bridges"
+      - "history"
+  constraints:
+    max_drive_per_day: "3.5 hours"
+    must_see:
+      - "Peak foliage in VT"
+      - "Mt. Washington summit"
+      - "A covered bridge"
+      - "A real Vermont general store"
+  iteration_log:
+    - date: "2026-09-01"
+      change: "Originally Boston → Maine coast → NH. Pivoted to a Vermont loop after the foliage tracker showed VT peaking the week of our trip."
+    - date: "2026-09-12"
+      change: "Booked Lodge at Spruce Peak — the only ski-resort lodge open mid-week in October."
+    - date: "2026-09-25"
+      change: "Added Sleepy Hollow Farm — saw it in three different fall-foliage articles, decided we had to."

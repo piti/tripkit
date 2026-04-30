@@ -18,6 +18,7 @@ html,body{height:100%;overflow:hidden}
 body{font-family:var(--font);background:var(--bg);color:var(--text)}
 .app{display:grid;grid-template-columns:460px 1fr;height:100vh}
 @media(max-width:960px){.app{grid-template-columns:1fr;grid-template-rows:55vh 45vh}}
+.legend-toggle{display:none}
 .sidebar{display:flex;flex-direction:column;background:var(--card);border-right:1px solid var(--border);overflow:hidden}
 .sidebar-scroll{overflow-y:auto;flex:1;scroll-behavior:smooth}
 .sidebar-scroll::-webkit-scrollbar{width:5px}
@@ -93,6 +94,22 @@ body{font-family:var(--font);background:var(--bg);color:var(--text)}
   border:2px solid #1b5e3b;font-family:var(--font);cursor:pointer;transition:transform .12s;letter-spacing:-.02em}
 .hm:hover{transform:scale(1.15)}
 .pp-conf{font-size:11px;font-weight:600;color:var(--accent);background:var(--accent-soft);padding:4px 8px;border-radius:4px;display:inline-block;margin-top:6px;letter-spacing:.02em}
+.endpin{display:flex;align-items:center;justify-content:center;width:28px;height:34px;font-size:11px;font-weight:700;color:#fff;font-family:var(--font);border-radius:14px 14px 14px 2px;transform:rotate(-45deg);box-shadow:0 2px 6px rgba(0,0,0,.35);border:2px solid #fff;cursor:pointer}
+.endpin span{transform:rotate(45deg);letter-spacing:.02em}
+.endpin.start{background:#1b5e3b}
+.endpin.end{background:#7a1f1f}
+@media(max-width:480px){
+  .hero{height:140px}.hero-text{padding:12px 14px}.hero-text h1{font-size:20px}
+  .day-nav{padding:8px 10px;gap:1px}.day-btn{padding:5px 8px;font-size:10px}
+  .day-panel{padding:12px 14px 32px}
+  .legend{bottom:auto;top:52px;left:8px;right:auto;padding:6px 10px;font-size:9px;line-height:1.6;max-width:60%}
+  .legend.collapsed .lr,.legend.collapsed > div:not(.legend-toggle){display:none}
+  .legend-toggle{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:10px;font-weight:600;user-select:none;color:var(--text)}
+  .legend-toggle::after{content:'▾';font-size:9px;transition:transform .15s;color:var(--muted)}
+  .legend.collapsed .legend-toggle::after{transform:rotate(-90deg)}
+  .map-ctrl{top:8px;right:8px}.mbtn{padding:5px 8px;font-size:9px}
+  .fullbtn{bottom:10px;right:8px;padding:5px 10px;font-size:10px}
+}
 </style>
 </head>
 <body>
@@ -316,14 +333,24 @@ const TRIP_DATA = {};
       L.polyline(r.points, { color: r.color || '#666', weight: r.width || 4, opacity: 0.8 }).addTo(map);
     });
   } else {
-    // Auto-generate routes from consecutive stops
-    days.forEach(d => {
-      if (d.stops && d.stops.length > 1) {
-        const pts = d.stops.filter(s => s.lat && s.lng).map(s => [s.lat, s.lng]);
-        if (pts.length > 1) {
-          L.polyline(pts, { color: '#fff', weight: 7, opacity: 0.4 }).addTo(map);
-          L.polyline(pts, { color: d.color || '#666', weight: 4, opacity: 0.8 }).addTo(map);
+    // Auto-generate routes. For each day, the polyline runs:
+    //   prev day's lodging (if any) → today's stops → today's lodging (if any)
+    // This stitches consecutive days together so the map reads as one continuous trip.
+    const isAnchorLodging = (l) => l && l.lat && l.lng && l.name !== 'Home';
+    days.forEach((d, di) => {
+      const pts = [];
+      const prevLodging = di > 0 ? days[di - 1].lodging : null;
+      if (isAnchorLodging(prevLodging)) pts.push([prevLodging.lat, prevLodging.lng]);
+      (d.stops || []).forEach(s => { if (s.lat && s.lng) pts.push([s.lat, s.lng]); });
+      if (isAnchorLodging(d.lodging)) {
+        const last = pts[pts.length - 1];
+        if (!last || last[0] !== d.lodging.lat || last[1] !== d.lodging.lng) {
+          pts.push([d.lodging.lat, d.lodging.lng]);
         }
+      }
+      if (pts.length > 1) {
+        L.polyline(pts, { color: '#fff', weight: 7, opacity: 0.4 }).addTo(map);
+        L.polyline(pts, { color: d.color || '#666', weight: 4, opacity: 0.8 }).addTo(map);
       }
     });
   }
@@ -356,8 +383,34 @@ const TRIP_DATA = {};
     markers.push(dm);
   });
 
+  // --- Start / End pins (origin & destination) ---
+  function endpoint(lat, lng, kind, name) {
+    const labelTxt = kind === 'start' ? 'A' : 'B';
+    const titleTxt = kind === 'start' ? 'Start' : 'End';
+    const icon = L.divIcon({
+      className: '',
+      html: `<div class="endpin ${kind}"><span>${labelTxt}</span></div>`,
+      iconSize: [28, 34], iconAnchor: [4, 32]
+    });
+    const m = L.marker([lat, lng], { icon, zIndexOffset: 800 }).addTo(map);
+    m.bindPopup(`<div class="pp-body" style="padding:14px">
+      <div class="pp-day">${titleTxt}</div>
+      <div class="pp-name">${name || titleTxt}</div>
+    </div>`, { maxWidth: 240 });
+  }
+  if (Number.isFinite(trip.origin_lat) && Number.isFinite(trip.origin_lng)) {
+    endpoint(trip.origin_lat, trip.origin_lng, 'start', trip.origin);
+    const destLat = Number.isFinite(trip.destination_lat) ? trip.destination_lat : trip.origin_lat;
+    const destLng = Number.isFinite(trip.destination_lng) ? trip.destination_lng : trip.origin_lng;
+    // Suppress the "End" pin if it's at the same coords as the Start (round trip).
+    if (Math.abs(destLat - trip.origin_lat) > 0.001 || Math.abs(destLng - trip.origin_lng) > 0.001) {
+      endpoint(destLat, destLng, 'end', trip.destination || trip.origin);
+    }
+  }
+
   // --- Hotel markers ---
-  const hotels = days
+  // Build per-night list, then dedupe by lat/lng so multi-night stays render as one marker.
+  const nights = days
     .filter(d => d.lodging && d.lodging.lat && d.lodging.lng && d.lodging.name !== 'Home')
     .map((d, i) => ({
       name: d.lodging.name,
@@ -371,11 +424,24 @@ const TRIP_DATA = {};
       navigate_url: d.lodging.navigate_url
     }));
 
-  const hotelLabel = (hotels.length > 0 && data.agent_context?.preferences?.accommodation_chain)
-    ? data.agent_context.preferences.accommodation_chain.split(' ')[0].substring(0, 3).toUpperCase()
-    : '🏨';
+  const hotelGroups = new Map();
+  nights.forEach(n => {
+    const key = n.lat.toFixed(4) + ',' + n.lng.toFixed(4);
+    if (!hotelGroups.has(key)) hotelGroups.set(key, []);
+    hotelGroups.get(key).push(n);
+  });
+  const hotels = Array.from(hotelGroups.values());
 
-  hotels.forEach(h => {
+  const hotelLabel = theme.hotel_label
+    || (data.agent_context?.preferences?.accommodation_chain
+        ? data.agent_context.preferences.accommodation_chain.split(' ')[0].substring(0, 3).toUpperCase()
+        : '🏨');
+
+  hotels.forEach(group => {
+    const h = group[0];
+    const ns = group.map(g => g.night);
+    const nightLabel = ns.length === 1 ? `Night ${ns[0]}` : `Nights ${ns[0]}–${ns[ns.length - 1]}`;
+    const dateLabel = group.length === 1 ? h.day : `${h.day} – ${group[group.length - 1].day}`;
     const icon = L.divIcon({
       className: '',
       html: `<div class="hm">${hotelLabel}</div>`,
@@ -383,7 +449,7 @@ const TRIP_DATA = {};
     });
     const m = L.marker([h.lat, h.lng], { icon, zIndexOffset: 1000 }).addTo(map);
     let popupHTML = `<div class="pp-body" style="padding:16px">
-      <div class="pp-day">Night ${h.night} · ${h.day}</div>
+      <div class="pp-day">${nightLabel} · ${dateLabel}</div>
       <div class="pp-name">${h.name}</div>
       <div style="font-size:12px;color:var(--muted);margin-bottom:6px">${h.loc}</div>`;
     if (h.booked && h.conf) popupHTML += `<div class="pp-conf">Conf# ${h.conf}</div>`;
@@ -394,7 +460,7 @@ const TRIP_DATA = {};
 
   // --- Legend ---
   const legendEl = document.getElementById('legend');
-  let legendHTML = '<b>Route segments</b>';
+  let legendHTML = '<div class="legend-toggle"><span>Route segments</span></div>';
   days.forEach(d => {
     legendHTML += `<div class="lr"><i style="background:${d.color || '#666'}"></i>Day ${d.number} · ${d.title.split('→')[0].replace('✅ ','').trim()}</div>`;
   });
@@ -404,9 +470,17 @@ const TRIP_DATA = {};
     legendHTML += `Booked hotels (${hotels.length})</div></div>`;
   }
   legendEl.innerHTML = legendHTML;
+  if (window.matchMedia('(max-width: 480px)').matches) legendEl.classList.add('collapsed');
+  legendEl.querySelector('.legend-toggle')?.addEventListener('click', () => legendEl.classList.toggle('collapsed'));
 
   // --- Fit bounds ---
-  const allPts = days.flatMap(d => (d.stops || []).filter(s => s.lat && s.lng).map(s => [s.lat, s.lng]));
+  // Include stops, hotels, and origin/destination pins so the initial fit covers everything.
+  const allPts = [
+    ...days.flatMap(d => (d.stops || []).filter(s => s.lat && s.lng).map(s => [s.lat, s.lng])),
+    ...days.flatMap(d => (d.lodging && d.lodging.lat && d.lodging.lng && d.lodging.name !== 'Home') ? [[d.lodging.lat, d.lodging.lng]] : []),
+  ];
+  if (Number.isFinite(trip.origin_lat) && Number.isFinite(trip.origin_lng)) allPts.push([trip.origin_lat, trip.origin_lng]);
+  if (Number.isFinite(trip.destination_lat) && Number.isFinite(trip.destination_lng)) allPts.push([trip.destination_lat, trip.destination_lng]);
   const fullBounds = L.latLngBounds(allPts).pad(0.06);
   map.fitBounds(fullBounds);
 

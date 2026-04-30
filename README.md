@@ -65,6 +65,16 @@ node convert.js examples/oregon-spring-2026.yaml my-trip.html
 open my-trip.html
 ```
 
+### Validate before you render
+
+TripKit ships with a schema validator that catches data bugs before they reach the renderer:
+
+```bash
+npx tripkit validate my-trip.yaml
+```
+
+It checks required fields, lat/lng ranges, valid stop types, hex colors, day numbering, and warns when `trip.total_stops` doesn't match the actual count. Validation also runs automatically before each render — pass `--no-validate` to skip it.
+
 ### Option 3: With an AI Agent (everyone)
 
 1. Start a conversation with your preferred AI agent (Claude recommended)
@@ -87,7 +97,10 @@ tripkit/
 ├── schema/
 │   └── tripkit.schema.yaml      # Data contract — the spec
 ├── examples/
-│   └── oregon-spring-2026.yaml  # Complete real-world example
+│   ├── oregon-spring-2026.yaml      # 6-day road trip (reference example)
+│   ├── southwest-parks-2026.yaml    # 5-day UT/AZ national parks loop
+│   ├── nyc-long-weekend-2026.yaml   # 3-day fly-in city break, no car
+│   └── new-england-fall-2026.yaml   # 5-day VT/NH foliage tour
 ├── renderers/
 │   ├── html/
 │   │   └── tripkit-renderer.html  # Self-contained HTML renderer

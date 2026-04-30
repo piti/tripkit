@@ -1,0 +1,463 @@
+# ============================================================
+# Southwest National Parks Loop 2026
+# 5-day Utah / Arizona red-rock loop from Las Vegas
+# Showcases: heavy hiking, desert palette, multi-park logistics
+# ============================================================
+
+trip:
+  title: "Southwest Parks Loop 2026"
+  subtitle: "Zion · Bryce · Page · Grand Canyon"
+  dates: "May 2–6, 2026"
+  total_days: 5
+  total_miles: "~900 mi"
+  total_stops: 13
+  travelers:
+    adults: 2
+    children: 0
+  origin: "Las Vegas, NV (fly in / fly out)"
+  origin_lat: 36.084
+  origin_lng: -115.154
+  vehicle: "Rental SUV"
+
+days:
+  # ========== DAY 1 ==========
+  - number: 1
+    title: "Las Vegas → Zion"
+    date: "Saturday, May 2"
+    status: upcoming
+    color: "#c25e1f"
+
+    summary:
+      drive: "3 hrs"
+      hike: "1–2 hrs"
+      miles: "~165 mi"
+
+    weather:
+      high: "82°F"
+      low: "55°F"
+      sky: "Sunny, dry"
+      rain_chance: "0%"
+      note: "Bring a hat and 2L of water minimum — desert sun is no joke."
+
+    meals:
+      breakfast: "In-N-Out near LAS rental car return — quick fuel"
+      lunch: "Valley of Fire visitor center picnic area"
+      dinner: "Oscar's Cafe, Springdale — patio overlooks the canyon at sunset"
+
+    lodging:
+      name: "Best Western Plus Zion Canyon Inn & Suites"
+      location: "Springdale, Utah"
+      price_estimate: "~$220/night"
+      confirmation: "XXXXX1234"
+      booked: true
+      lat: 37.1924
+      lng: -112.9870
+      notes: "Walk to Zion shuttle stop. Pool, free breakfast, mountain views."
+      navigate_url: "https://www.google.com/maps/dir/?api=1&destination=Best+Western+Plus+Zion+Canyon+Inn+Springdale+UT"
+
+    tips:
+      - "Park the rental in Springdale — Zion's canyon is shuttle-only Mar–Nov."
+      - "Watchman Trail is the perfect golden-hour hike — start at 5 PM, summit by sunset."
+      - "Refill water bottles at every visitor center; spigots are everywhere."
+
+    stops:
+      - name: "Valley of Fire State Park"
+        lat: 36.4307
+        lng: -114.5147
+        type: scenic
+        label: "Detour"
+        description: "60-min detour off I-15. Mars-red Aztec sandstone formations, petroglyphs, the Fire Wave. Drive the loop and stop at Mouse's Tank."
+        duration: "1.5–2 hrs"
+        parking_fee: "$15 NV non-resident"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=36.4307,-114.5147"
+
+      - name: "Zion Visitor Center"
+        lat: 37.2002
+        lng: -112.9871
+        type: scenic
+        label: "Stop"
+        description: "Pick up the shuttle here. Grab a Zion map, fill water bottles, check Angel's Landing permit status board."
+        duration: "20–30 min"
+        parking_fee: "$35 park fee (7-day) or America the Beautiful pass"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=37.2002,-112.9871"
+
+      - name: "Watchman Trail (sunset)"
+        lat: 37.1996
+        lng: -112.9871
+        type: hike
+        label: "Sunset"
+        description: "3.3-mile out-and-back from the visitor center. Modest 370 ft climb to a viewpoint over the West Temple and Watchman peak. Light up like fire at sunset."
+        duration: "2 hrs"
+        parking_fee: "Included with park fee"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=37.1996,-112.9871"
+
+  # ========== DAY 2 ==========
+  - number: 2
+    title: "Zion full day"
+    date: "Sunday, May 3"
+    status: upcoming
+    color: "#a04020"
+
+    summary:
+      drive: "Shuttle only"
+      hike: "5–7 hrs"
+      miles: "0"
+
+    weather:
+      high: "84°F"
+      low: "58°F"
+      sky: "Sunny, light wind"
+      rain_chance: "0%"
+      note: "Start hikes by 7 AM — the canyon walls trap heat by 11."
+
+    meals:
+      breakfast: "Hotel breakfast or Deep Creek Coffee, Springdale"
+      lunch: "Zion Lodge Red Rock Grill (sit on the lawn under cottonwoods)"
+      dinner: "Bit & Spur — Mexican, locally famous since the 80s"
+
+    lodging:
+      name: "Best Western Plus Zion Canyon Inn & Suites"
+      location: "Springdale, Utah"
+      price_estimate: "~$220/night"
+      confirmation: "XXXXX1234"
+      booked: true
+      lat: 37.1924
+      lng: -112.9870
+      notes: "Second night — keep the same room"
+
+    alerts:
+      - "🪨 Angel's Landing requires a permit (lottery + day-before). If you didn't get one, do Observation Point via East Mesa Trail instead — same view, no permit, less crowded."
+
+    tips:
+      - "Take the first shuttle (6 AM) to beat heat and crowds for Angel's Landing."
+      - "The Narrows from the bottom (Riverside Walk → Mystery Falls) is wadeable in May with rented neoprene boots from Zion Outfitter."
+      - "Emerald Pools loop is a perfect afternoon recovery hike — shaded, gentle, gorgeous."
+
+    stops:
+      - name: "Angel's Landing"
+        lat: 37.2581
+        lng: -112.9514
+        type: hike
+        label: "Big hike"
+        description: "5.4 miles, 1,488 ft climb. Walter's Wiggles switchbacks then the chain section ridge. Permit required. One of the most exposed hikes in any US park — not for vertigo."
+        duration: "4–5 hrs"
+        reservation_required: true
+        reservation_url: "https://www.recreation.gov/permits/angels-landing"
+        kid_friendly: false
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=37.2581,-112.9514"
+
+      - name: "Emerald Pools Loop"
+        lat: 37.2497
+        lng: -112.9588
+        type: hike
+        label: "Easy"
+        description: "Lower (paved, 1.2 mi) → Middle → Upper. Hanging gardens, seep springs, water curtain over an alcove. Best in the afternoon when sun hits the upper bowl."
+        duration: "1.5–2 hrs"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=37.2497,-112.9588"
+
+      - name: "Riverside Walk → Narrows mouth"
+        lat: 37.2856
+        lng: -112.9479
+        type: scenic
+        label: "Stroll"
+        description: "Paved 2-mile out-and-back to where the Virgin River disappears between 1,000 ft cliffs. Wade in 50 ft if you brought water shoes."
+        duration: "1–1.5 hrs"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=37.2856,-112.9479"
+
+  # ========== DAY 3 ==========
+  - number: 3
+    title: "Zion → Bryce → Page"
+    date: "Monday, May 4"
+    status: upcoming
+    color: "#d97a3c"
+
+    summary:
+      drive: "5 hrs"
+      hike: "2 hrs"
+      miles: "~270 mi"
+
+    weather:
+      high: "72°F (Bryce 8000 ft)"
+      low: "38°F"
+      sky: "Sunny, breezy at altitude"
+      rain_chance: "10%"
+      note: "Bryce is 4,000 ft higher than Zion — bring a fleece even in May."
+
+    meals:
+      breakfast: "Hotel breakfast"
+      lunch: "Bryce Canyon Lodge dining room — cafeteria + sit-down side"
+      dinner: "El Tapatio, Page — best Mexican in town, walk from hotel"
+
+    lodging:
+      name: "Best Western View of Lake Powell"
+      location: "Page, Arizona"
+      price_estimate: "~$165/night"
+      confirmation: "XXXXX5678"
+      booked: true
+      lat: 36.9097
+      lng: -111.4587
+      notes: "Hilltop with Lake Powell views. Pool, free breakfast, easy Antelope Canyon shuttle pickup."
+      navigate_url: "https://www.google.com/maps/dir/?api=1&destination=Best+Western+View+of+Lake+Powell+Page+AZ"
+
+    tips:
+      - "Drive Hwy 12 — one of America's prettiest scenic byways. Slot in 30 min for the Hogsback ridge between Boulder and Escalante."
+      - "At Bryce, walk the rim from Sunrise to Sunset Point (1 mi) for the best free view of the amphitheater."
+      - "Time the Page arrival for sunset at Horseshoe Bend tomorrow morning — too crowded after 9 AM."
+
+    stops:
+      - name: "Bryce Canyon — Sunrise & Sunset Points"
+        lat: 37.6248
+        lng: -112.1620
+        type: scenic
+        label: "Rim walk"
+        description: "Two of the most-photographed viewpoints on the rim. 1-mile flat connector along the edge looks down on Thor's Hammer and the Silent City of hoodoos."
+        duration: "30–45 min"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=37.6248,-112.1620"
+
+      - name: "Navajo Loop / Queen's Garden"
+        lat: 37.6238
+        lng: -112.1640
+        type: hike
+        label: "Hoodoo hike"
+        description: "Best 3-mile hike in any US park, full stop. Drop down Wall Street switchbacks, weave through hoodoos, come back up Queen's Garden. Do it counter-clockwise."
+        duration: "2 hrs"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=37.6238,-112.1640"
+
+  # ========== DAY 4 ==========
+  - number: 4
+    title: "Page → Grand Canyon South Rim"
+    date: "Tuesday, May 5"
+    status: upcoming
+    color: "#7d3c1a"
+
+    summary:
+      drive: "3 hrs"
+      hike: "1.5 hrs"
+      miles: "~140 mi"
+
+    weather:
+      high: "75°F (rim)"
+      low: "42°F"
+      sky: "Clear"
+      rain_chance: "5%"
+      note: "Sunset at Hopi Point is the picture you've seen on every postcard."
+
+    meals:
+      breakfast: "Hotel breakfast — early start for Horseshoe Bend"
+      lunch: "Cameron Trading Post (en route) — Navajo tacos in a 1916 stone post"
+      dinner: "El Tovar Dining Room (book ahead) or Bright Angel Restaurant"
+
+    lodging:
+      name: "Best Western Premier Grand Canyon Squire Inn"
+      location: "Tusayan, Arizona"
+      price_estimate: "~$280/night"
+      confirmation: "XXXXX9012"
+      booked: true
+      lat: 35.9684
+      lng: -112.1218
+      notes: "1 mile south of the park entrance. Bowling alley, two pools, free shuttle into the park."
+      navigate_url: "https://www.google.com/maps/dir/?api=1&destination=Best+Western+Premier+Grand+Canyon+Squire+Inn+Tusayan+AZ"
+
+    alerts:
+      - "📅 Antelope Canyon entry is by Navajo guide only — book the Lower Canyon tour 4–6 weeks ahead through Ken's Tours or Dixie Ellis'."
+
+    tips:
+      - "Horseshoe Bend opens at sunrise — be there by 6:30 AM to avoid tour bus crush."
+      - "Stop at the Watchtower (Desert View) on the way in — eastern entrance to GCNP saves 30 min vs going through Tusayan first."
+      - "Sunset shuttle from Bright Angel Lodge to Hopi Point runs every 15 min, free."
+
+    stops:
+      - name: "Horseshoe Bend"
+        lat: 36.8625
+        lng: -111.5103
+        type: scenic
+        label: "Sunrise"
+        description: "1.5-mile round trip from the parking lot to the overlook. The Colorado River carves a 270° loop around a sandstone fin 1,000 ft below. Bring a wide-angle lens."
+        duration: "1 hr"
+        parking_fee: "$10 City of Page"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=36.8625,-111.5103"
+
+      - name: "Lower Antelope Canyon"
+        lat: 36.8619
+        lng: -111.4133
+        type: scenic
+        label: "Slot canyon"
+        description: "Guided tour through a slot canyon carved by flash floods. Wavy walls glow orange and purple in shafts of sunlight. Easier than Upper for photos (less crowded, cheaper)."
+        duration: "1.5 hrs"
+        reservation_required: true
+        reservation_url: "https://lowerantelope.com"
+        parking_fee: "Included in tour"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=36.8619,-111.4133"
+
+      - name: "Mather Point (sunset)"
+        lat: 36.0613
+        lng: -112.1080
+        type: scenic
+        label: "Sunset"
+        description: "First view of the Grand Canyon for most arriving visitors, and still the best for impact. 5-min walk from the visitor center."
+        duration: "30–45 min"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=36.0613,-112.1080"
+
+  # ========== DAY 5 ==========
+  - number: 5
+    title: "Grand Canyon → Las Vegas"
+    date: "Wednesday, May 6"
+    status: upcoming
+    color: "#5c2a14"
+
+    summary:
+      drive: "4.5 hrs"
+      hike: "1.5–2 hrs"
+      miles: "~280 mi"
+
+    weather:
+      high: "78°F"
+      low: "44°F"
+      sky: "Clear, gusty PM"
+      rain_chance: "0%"
+      note: "Last day — pace it for the LAS evening flight."
+
+    meals:
+      breakfast: "Bright Angel Lodge — sunrise window seat if you can get one"
+      lunch: "Hoover Dam visitor center cafeteria, or push through to Boulder City for In-N-Out"
+      dinner: "Vegas — depends on flight time"
+
+    lodging:
+      name: "Home"
+      location: "Returning home"
+      booked: true
+      lat: 36.0840
+      lng: -115.1537
+      notes: "Flight out of LAS — return rental by 7 PM"
+
+    tips:
+      - "Bright Angel Trail down to 1.5-mile Resthouse and back is a perfect taste of below-the-rim without committing to Plateau Point."
+      - "Hoover Dam adds 20 min off Hwy 93 — totally worth it. Don't bother with the dam tour, just walk across the bridge."
+      - "Drop the rental 2 hrs before your flight — LAS rental return shuttle runs slow."
+
+    stops:
+      - name: "Bright Angel Trail (1.5-mile Resthouse)"
+        lat: 36.0578
+        lng: -112.1438
+        type: hike
+        label: "Half-day"
+        description: "Out-and-back to the 1.5-mile Resthouse — 3 miles, 1,100 ft of elevation (mostly down on the way in, all up on the way out). Mules pass you. Real canyon experience."
+        duration: "2 hrs"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=36.0578,-112.1438"
+
+      - name: "Hoover Dam"
+        lat: 36.0162
+        lng: -114.7377
+        type: scenic
+        label: "Engineering"
+        description: "Walk across the Mike O'Callaghan–Pat Tillman Memorial Bridge for the best photo of the dam. Free, 15 min, blows minds."
+        duration: "30–45 min"
+        parking_fee: "$10 dam parking, or free at the bridge lot"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=36.0162,-114.7377"
+
+# ============================================================
+# ROUTES — explicit polylines that follow real road geometry
+# (I-15, US-89, UT-9, UT-12, US-93). Auto-generation works fine
+# without this block, but hand-curated waypoints look smoother.
+# ============================================================
+routes:
+  # Day 1: Vegas → Valley of Fire → I-15 → St. George → Springdale
+  - day: 1
+    color: "#c25e1f"
+    width: 4
+    points:
+      - [36.084, -115.154]
+      - [36.430, -114.515]
+      - [37.097, -113.568]
+      - [37.175, -113.283]
+      - [37.192, -112.987]
+
+  # Day 2: Zion canyon shuttle loop
+  - day: 2
+    color: "#a04020"
+    width: 4
+    points:
+      - [37.192, -112.987]
+      - [37.258, -112.951]
+      - [37.250, -112.959]
+      - [37.286, -112.948]
+      - [37.192, -112.987]
+
+  # Day 3: Springdale → Bryce → Kanab → Page
+  - day: 3
+    color: "#d97a3c"
+    width: 4
+    points:
+      - [37.192, -112.987]
+      - [37.342, -112.642]
+      - [37.524, -112.227]
+      - [37.624, -112.162]
+      - [37.524, -112.227]
+      - [37.045, -112.527]
+      - [36.910, -111.459]
+
+  # Day 4: Page → Horseshoe → Antelope → Cameron → Grand Canyon → Tusayan
+  - day: 4
+    color: "#7d3c1a"
+    width: 4
+    points:
+      - [36.910, -111.459]
+      - [36.862, -111.510]
+      - [36.862, -111.413]
+      - [35.875, -111.413]
+      - [36.061, -112.108]
+      - [35.968, -112.122]
+
+  # Day 5: Tusayan → Bright Angel → Williams → Kingman → Hoover → Vegas
+  - day: 5
+    color: "#5c2a14"
+    width: 4
+    points:
+      - [35.968, -112.122]
+      - [36.058, -112.144]
+      - [35.250, -112.190]
+      - [35.189, -114.053]
+      - [36.016, -114.738]
+      - [36.084, -115.154]
+
+theme:
+  font_family: "DM Sans, sans-serif"
+  accent_color: "#c25e1f"
+  map_style: "terrain"
+
+agent_context:
+  preferences:
+    pace: "moderate"
+    budget: "mid-range"
+    accommodation_chain: "Best Western"
+    interests:
+      - "national parks"
+      - "hiking"
+      - "geology"
+      - "photography"
+  constraints:
+    max_drive_per_day: "5 hours"
+    must_see:
+      - "Angel's Landing or Observation Point"
+      - "Bryce hoodoos"
+      - "Horseshoe Bend at sunrise"
+      - "Grand Canyon South Rim sunset"
+  iteration_log:
+    - date: "2026-04-15"
+      change: "Original plan included North Rim — dropped because it doesn't open until May 15."
+    - date: "2026-04-18"
+      change: "Swapped Upper Antelope for Lower Antelope — half the price, better photos, easier ladders."
+    - date: "2026-04-22"
+      change: "Added Hoover Dam to Day 5 — only adds 20 min and makes the LAS approach more interesting."

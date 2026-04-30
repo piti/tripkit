@@ -1,0 +1,283 @@
+# ============================================================
+# NYC Long Weekend 2026
+# 3-day fly-in city break — no car, one hotel, walking + subway
+# Showcases: city/museum/food/shopping stop types, single-base trip,
+# the schema isn't road-trip-only.
+# ============================================================
+
+trip:
+  title: "NYC Long Weekend 2026"
+  subtitle: "Museums · Broadway · Skyline"
+  dates: "June 12–14, 2026"
+  total_days: 3
+  total_miles: "Walk + subway"
+  total_stops: 10
+  travelers:
+    adults: 2
+    children: 0
+  origin: "JFK (fly in / fly out)"
+  origin_lat: 40.6413
+  origin_lng: -73.7781
+  vehicle: "Subway + walking"
+
+days:
+  # ========== DAY 1 ==========
+  - number: 1
+    title: "Arrive · Midtown · Broadway"
+    date: "Friday, June 12"
+    status: upcoming
+    color: "#1d4e89"
+
+    summary:
+      drive: "—"
+      hike: "—"
+      miles: "~4 mi walking"
+
+    weather:
+      high: "78°F"
+      low: "63°F"
+      sky: "Partly cloudy"
+      rain_chance: "20%"
+      note: "Bring a light jacket for the air-conditioned theater."
+
+    meals:
+      breakfast: "On the plane — eat at JFK if possible"
+      lunch: "The Halal Guys, 53rd & 6th — the original cart"
+      dinner: "Joe Allen, 46th — pre-theater Broadway institution since 1965, book ahead"
+
+    lodging:
+      name: "Marriott Marquis Times Square"
+      location: "1535 Broadway, Manhattan"
+      price_estimate: "~$420/night"
+      confirmation: "XXXXX1234"
+      booked: true
+      lat: 40.7587
+      lng: -73.9849
+      notes: "Three nights, same room. Eighth-floor revolving restaurant has a stupid view. Direct elevator to Broadway."
+      navigate_url: "https://www.google.com/maps/dir/?api=1&destination=Marriott+Marquis+Times+Square+NYC"
+
+    tips:
+      - "Take the AirTrain to Jamaica then E train to 50th St — $11 vs $80 cab and faster at rush hour."
+      - "TKTS booth in Times Square sells day-of Broadway tickets at 30–50% off. Show up by 2:30 PM."
+      - "The Marriott has an entrance through the lobby of 1535 Broadway — skips the crowd outside."
+
+    stops:
+      - name: "Times Square"
+        lat: 40.7580
+        lng: -73.9855
+        type: city
+        label: "Icon"
+        description: "Walk through it once at night for the lights, then never come back. The TKTS booth red steps are a fine spot to people-watch and plan."
+        duration: "30–45 min"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=40.7580,-73.9855"
+
+      - name: "Bryant Park"
+        lat: 40.7536
+        lng: -73.9832
+        type: city
+        label: "Stroll"
+        description: "Quieter sibling of Times Square one block east. Carousel, free WiFi, the back of the New York Public Library. Best spot in Midtown to sit with a coffee."
+        duration: "30 min"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=40.7536,-73.9832"
+
+      - name: "Broadway show — Hadestown"
+        lat: 40.7596
+        lng: -73.9870
+        type: activity
+        label: "Theater"
+        description: "Walter Kerr Theatre, 219 W 48th. 8 PM curtain, ~2.5 hrs. If sold out: Hamilton, MJ, or whatever's at TKTS."
+        duration: "2.5 hrs"
+        reservation_required: true
+        reservation_url: "https://www.telecharge.com"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=40.7596,-73.9870"
+
+  # ========== DAY 2 ==========
+  - number: 2
+    title: "Met · Central Park · Lincoln Center"
+    date: "Saturday, June 13"
+    status: upcoming
+    color: "#2d7a50"
+
+    summary:
+      drive: "—"
+      hike: "—"
+      miles: "~6 mi walking"
+
+    weather:
+      high: "82°F"
+      low: "67°F"
+      sky: "Sunny"
+      rain_chance: "10%"
+      note: "Long walking day — comfortable shoes, sunglasses, water bottle."
+
+    meals:
+      breakfast: "Sarabeth's Central Park South — line moves fast at 9 AM"
+      lunch: "Tessa, Amsterdam Ave — Mediterranean, walk over from the Met"
+      dinner: "Don Angie, West Village — modern Italian, pinwheel lasagna is iconic, book 4 weeks out"
+
+    lodging:
+      name: "Marriott Marquis Times Square"
+      location: "1535 Broadway, Manhattan"
+      price_estimate: "~$420/night"
+      confirmation: "XXXXX1234"
+      booked: true
+      lat: 40.7587
+      lng: -73.9849
+      notes: "Same room, second night"
+
+    tips:
+      - "The Met opens at 10 AM. Hit Egyptian Wing → Greek/Roman → American Wing → European paintings in that order to dodge tour groups."
+      - "Pay-what-you-wish for NY/NJ/CT residents only — others must pay $30. Bring a residence ID if you have one."
+      - "Bethesda Terrace is the prettiest spot in Central Park. Walk down from the Met via the East Drive."
+
+    stops:
+      - name: "The Metropolitan Museum of Art"
+        lat: 40.7794
+        lng: -73.9632
+        type: museum
+        label: "Museum"
+        description: "Pick 3 wings or you'll burn out. Egyptian Wing (Temple of Dendur), American Wing (Tiffany glass courtyard), and European Paintings (Vermeer/Sargent rooms) is a perfect 3 hrs."
+        duration: "3–4 hrs"
+        parking_fee: "$30 adult"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=40.7794,-73.9632"
+
+      - name: "Central Park — Bethesda Terrace"
+        lat: 40.7739
+        lng: -73.9706
+        type: scenic
+        label: "Stroll"
+        description: "Walk in from 79th & 5th, descend the staircase to Bethesda Fountain, cross Bow Bridge, exit at 72nd & Central Park West. 1.5-mile loop, ~45 min."
+        duration: "45 min–1 hr"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=40.7739,-73.9706"
+
+      - name: "Lincoln Center plaza"
+        lat: 40.7725
+        lng: -73.9835
+        type: city
+        label: "Photo stop"
+        description: "Revson Fountain at dusk is one of the city's best photos. Free to walk through; the Met Opera lobby is open during shows."
+        duration: "20 min"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=40.7725,-73.9835"
+
+      - name: "Hell's Kitchen / 9th Ave"
+        lat: 40.7615
+        lng: -73.9900
+        type: food
+        label: "Walk-back"
+        description: "Best dense restaurant strip in Manhattan. Walk south on 9th Ave from 57th to 42nd and you'll pass 80 places — Totto Ramen, Casellula, Empanada Mama."
+        duration: "30–45 min"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=40.7615,-73.9900"
+
+  # ========== DAY 3 ==========
+  - number: 3
+    title: "Lower Manhattan · Statue of Liberty · Fly out"
+    date: "Sunday, June 14"
+    status: upcoming
+    color: "#a04880"
+
+    summary:
+      drive: "—"
+      hike: "—"
+      miles: "~5 mi walking + ferry"
+
+    weather:
+      high: "80°F"
+      low: "65°F"
+      sky: "Partly sunny"
+      rain_chance: "15%"
+      note: "Pack the night before — checkout 11 AM, store bags with the bell desk."
+
+    meals:
+      breakfast: "Russ & Daughters Cafe, Lower East Side — classic Jewish appetizing, book 9 AM slot"
+      lunch: "Frenchette Bakery, Tribeca — sit at the counter with a kouign-amann"
+      dinner: "JFK terminal — overpriced sushi at the gate is the NYC tradition"
+
+    lodging:
+      name: "Home"
+      location: "Returning home"
+      booked: true
+      lat: 37.7749
+      lng: -122.4194
+      notes: "JFK 7:45 PM departure — be at gate by 6:30 PM"
+
+    alerts:
+      - "🛂 Statue of Liberty ferry tickets sell out same-day. Book the 9 AM Statue Cruises ferry online 2 weeks in advance."
+
+    tips:
+      - "Take the subway, not a cab, for the 9/11 Memorial. Cabs get stuck in Lower Manhattan traffic."
+      - "Skip the Crown Cruise — Pedestal access is enough for the view and saves 90 min."
+      - "Leave the city by 4 PM for a 7:45 PM JFK flight. Sundays the BQE is a parking lot."
+
+    stops:
+      - name: "9/11 Memorial & Museum"
+        lat: 40.7115
+        lng: -74.0134
+        type: museum
+        label: "Memorial"
+        description: "The reflecting pools are free and open 24/7 — the Museum has a separate $33 ticket. Plan 2 hrs for the Museum if you go in. Quiet, heavy, essential."
+        duration: "1.5–2 hrs"
+        reservation_url: "https://www.911memorial.org/visit/museum/tickets"
+        kid_friendly: false
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=40.7115,-74.0134"
+
+      - name: "Statue of Liberty + Ellis Island"
+        lat: 40.7033
+        lng: -74.0170
+        type: activity
+        label: "Ferry"
+        description: "Ferry departs Battery Park, hits Liberty Island then Ellis Island, returns to Battery. 4 hrs total with both stops. Pedestal pass includes museum and viewpoint."
+        duration: "3.5–4 hrs"
+        reservation_required: true
+        reservation_url: "https://www.statuecruises.com"
+        parking_fee: "$24.50 ferry + Pedestal"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=40.7033,-74.0170"
+
+      - name: "Brooklyn Bridge promenade"
+        lat: 40.7061
+        lng: -73.9969
+        type: scenic
+        label: "Walk"
+        description: "If time permits — walk Manhattan side to Dumbo (~25 min). Best view of Lower Manhattan skyline + Statue. Then F train back."
+        duration: "1 hr"
+        kid_friendly: true
+        navigate_url: "https://www.google.com/maps/dir/?api=1&destination=40.7061,-73.9969"
+
+theme:
+  font_family: "DM Sans, sans-serif"
+  accent_color: "#1d4e89"
+  map_style: "topo"
+
+agent_context:
+  preferences:
+    pace: "packed"
+    budget: "mid-range"
+    accommodation_chain: "Marriott"
+    interests:
+      - "museums"
+      - "food"
+      - "theater"
+      - "architecture"
+  constraints:
+    max_drive_per_day: "—"
+    must_see:
+      - "A Broadway show"
+      - "The Met (one wing minimum)"
+      - "Statue of Liberty (Pedestal access)"
+    avoid:
+      - "Tourist trap restaurants in Times Square"
+      - "Empire State Building line (Top of the Rock or Edge are better)"
+  iteration_log:
+    - date: "2026-05-20"
+      change: "Switched from Empire State to Edge at Hudson Yards — open-air, less line, better photo. Then switched again to skipping it entirely; the Marriott revolving restaurant has the same view free."
+    - date: "2026-05-28"
+      change: "Booked Marriott Marquis specifically for the elevator — guests can skip the Times Square crowd."
+    - date: "2026-06-02"
+      change: "Don Angie booked at 8:45 PM — earliest slot available 4 weeks out."
