@@ -2,7 +2,7 @@
 
 All notable changes to TripKit are documented here. Versioning follows [SemVer](https://semver.org/).
 
-## [Unreleased]
+## [1.3.0] — 2026-04-30
 
 ### Added
 - GitHub Actions CI: runs `npm test` (validator + skill-coverage gate) and validates every YAML in `examples/` on Node 18/20/22 for every push and PR to `main`.
