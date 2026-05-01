@@ -7,9 +7,14 @@ All notable changes to TripKit are documented here. Versioning follows [SemVer](
 ### Added
 - GitHub Actions CI: runs `npm test` (validator + skill-coverage gate) and validates every YAML in `examples/` on Node 18/20/22 for every push and PR to `main`.
 - **Claude Code skill bundle.** `agent/SKILL.md` now ships with `name`/`description` YAML frontmatter so it discovers as a proper Claude Code skill. New `npx tripkit install-skill` command copies the skill to `~/.claude/skills/tripkit/` (or `--project` for `.claude/skills/`); after install, invoke with `/skills tripkit`.
+- **Dark mode.** `theme.dark_mode: true` now applies a `data-theme="dark"` attribute to the document and overrides the full color system: warm near-black background, lifted accent green, translucent callout tints, dark Leaflet popups. Stop badges, callouts, and chrome all theme automatically.
+- **Day-status visual treatment.** The `status: completed | active | upcoming` field on each day is now reflected in the day-nav: completed days are muted, the day flagged `active` (today) gets a small accent dot. Selecting a muted day still highlights it fully.
 
 ### Changed
 - Renamed `agent/AGENT-SKILL.md` → `agent/SKILL.md` to match Claude Code's skill convention. The body is unchanged and still agent-agnostic; the new frontmatter is ignored by non-Claude tooling.
+- Renderer color system refactored to CSS variables. Stop badge colors, callout backgrounds, and shadows are all theme-aware via `--b-*-bg/fg`, `--*-soft`, and `--shadow*` variables — single source of truth for both light and dark modes.
+- Stop cards lift on hover (subtle shadow + 1px translate) for a more tactile feel.
+- Removed unused `--coral` variable (was a duplicate of `--warn`).
 
 ## [1.2.0] — 2026-04-30
 
