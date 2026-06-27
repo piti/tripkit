@@ -125,8 +125,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--text)}
 .pp-day{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:3px}
 .pp-name{font-family:var(--serif);font-size:16px;line-height:1.25;margin-bottom:5px}
 .pp-desc{font-size:11px;color:var(--muted);line-height:1.5}
-.cm{display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-weight:600;font-size:10px;color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.3);border:2px solid #fff;font-family:var(--font);cursor:pointer;transition:transform .12s}
+.cm{display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-weight:600;font-size:10px;color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.3);border:2px solid #fff;font-family:var(--font);cursor:pointer;transition:transform .12s;position:relative}
 .cm:hover{transform:scale(1.2)}
+/* Media cue on a stop marker: camera + count, clickable straight to the lightbox. */
+.cm-media{position:absolute;top:-7px;right:-9px;display:flex;align-items:center;gap:1px;height:15px;padding:0 4px;border-radius:8px;background:#fff;color:var(--accent);font-size:9px;font-weight:700;line-height:1;box-shadow:0 1px 4px rgba(0,0,0,.35);border:1.5px solid var(--accent);cursor:pointer;transition:transform .12s}
+.cm-media:hover{transform:scale(1.18)}
+.cm-media .ic{font-size:8px;line-height:1}
 .hm{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:6px;
   font-weight:700;font-size:9px;color:#1b5e3b;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.35);
   border:2px solid #1b5e3b;font-family:var(--font);cursor:pointer;transition:transform .12s;letter-spacing:-.02em}
@@ -485,13 +489,18 @@ const TRIP_DATA = {};
     const dm = [];
     d.stops.forEach((s, si) => {
       if (!s.lat || !s.lng) return;
+      const sMedia = getStopMedia(s);
+      // When a stop has media, overlay a camera+count badge on its marker that jumps
+      // straight to the lightbox (the badge stops propagation so the popup stays put).
+      const mediaBadge = sMedia.length
+        ? `<span class="cm-media" title="${sMedia.length} photo${sMedia.length === 1 ? '' : 's'}/video" onclick="event.stopPropagation();openLightbox(${di},${si},0)"><span class="ic">📷</span>${sMedia.length}</span>`
+        : '';
       const icon = L.divIcon({
         className: '',
-        html: `<div class="cm" style="background:${d.color || '#666'}">${d.number}</div>`,
+        html: `<div class="cm" style="background:${d.color || '#666'}">${d.number}${mediaBadge}</div>`,
         iconSize: [26, 26], iconAnchor: [13, 13]
       });
       const m = L.marker([s.lat, s.lng], { icon }).addTo(map);
-      const sMedia = getStopMedia(s);
       // Lead the popup with the first real photo when available; else the hero/Unsplash image.
       const img = sMedia.length ? sMedia[0].thumb : getImage(s);
       let ppMedia = '';
