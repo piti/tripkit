@@ -158,8 +158,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text)}
 .lb-stage img,.lb-stage video{max-width:92vw;max-height:78vh;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,.6);object-fit:contain;background:#000}
 .lb-cap{color:#f0ede4;font-family:var(--font);font-size:13px;text-align:center;margin-top:14px;max-width:80vw;line-height:1.5;min-height:18px}
 .lb-meta{color:#908a78;font-size:11px;margin-top:4px}
-.lb-count{position:absolute;top:20px;left:0;right:0;text-align:center;color:#cbc8bd;font-size:12px;font-family:var(--font);letter-spacing:.04em}
-.lb-close{position:absolute;top:16px;right:22px;width:38px;height:38px;border:none;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:20px;cursor:pointer;line-height:1}
+.lb-count{position:absolute;top:20px;left:0;right:0;text-align:center;color:#cbc8bd;font-size:12px;font-family:var(--font);letter-spacing:.04em;pointer-events:none}
+.lb-close{position:absolute;top:16px;right:22px;width:38px;height:38px;border:none;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:20px;cursor:pointer;line-height:1;z-index:2}
 .lb-close:hover{background:rgba(255,255,255,.24)}
 .lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border:none;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .lb-nav:hover{background:rgba(255,255,255,.24)}
@@ -451,18 +451,27 @@ const TRIP_DATA = {};
     // Auto-generate routes. For each day, the polyline runs:
     //   prev day's lodging (if any) → today's stops → today's lodging (if any)
     // This stitches consecutive days together so the map reads as one continuous trip.
+    // Day 1 also anchors to trip.origin, and the final day returns to the
+    // destination (or origin, for a round trip), so the Start/End pins connect to
+    // the route instead of floating unattached.
     const isAnchorLodging = (l) => l && l.lat && l.lng && l.name !== 'Home';
+    const hasOrigin = Number.isFinite(trip.origin_lat) && Number.isFinite(trip.origin_lng);
+    const destLat = Number.isFinite(trip.destination_lat) ? trip.destination_lat : (hasOrigin ? trip.origin_lat : null);
+    const destLng = Number.isFinite(trip.destination_lng) ? trip.destination_lng : (hasOrigin ? trip.origin_lng : null);
+    const pushUnique = (pts, p) => {
+      const last = pts[pts.length - 1];
+      if (!last || last[0] !== p[0] || last[1] !== p[1]) pts.push(p);
+    };
     days.forEach((d, di) => {
       const pts = [];
+      if (di === 0 && hasOrigin) pts.push([trip.origin_lat, trip.origin_lng]);
       const prevLodging = di > 0 ? days[di - 1].lodging : null;
-      if (isAnchorLodging(prevLodging)) pts.push([prevLodging.lat, prevLodging.lng]);
-      (d.stops || []).forEach(s => { if (s.lat && s.lng) pts.push([s.lat, s.lng]); });
-      if (isAnchorLodging(d.lodging)) {
-        const last = pts[pts.length - 1];
-        if (!last || last[0] !== d.lodging.lat || last[1] !== d.lodging.lng) {
-          pts.push([d.lodging.lat, d.lodging.lng]);
-        }
-      }
+      if (isAnchorLodging(prevLodging)) pushUnique(pts, [prevLodging.lat, prevLodging.lng]);
+      (d.stops || []).forEach(s => { if (s.lat && s.lng) pushUnique(pts, [s.lat, s.lng]); });
+      if (isAnchorLodging(d.lodging)) pushUnique(pts, [d.lodging.lat, d.lodging.lng]);
+      // On the last day, close the loop back to the destination/origin so the trip
+      // visibly returns home (covers the common `lodging.name: "Home"` last day).
+      if (di === days.length - 1 && destLat != null && destLng != null) pushUnique(pts, [destLat, destLng]);
       if (pts.length > 1) {
         L.polyline(pts, { color: '#fff', weight: 7, opacity: 0.4 }).addTo(map);
         L.polyline(pts, { color: d.color || '#666', weight: 4, opacity: 0.8 }).addTo(map);

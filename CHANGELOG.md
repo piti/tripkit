@@ -14,6 +14,10 @@ All notable changes to TripKit are documented here. Versioning follows [SemVer](
   - **Agent skill:** new Phase 5 documents the post-trip ingest → review → apply flow, with the agent owning the captioning/match-fixing review step.
 - Dependencies: `exifr` (required for ingest) added to `dependencies`; `sharp` (thumbnails) added to `optionalDependencies`.
 
+### Fixed
+- **Lightbox close button.** The full-width photo counter (`1 / 2`) overlay was intercepting clicks aimed at the `×` button, so closing by click failed (Esc still worked). The counter is now click-through and the close button sits above it.
+- **Origin/destination pins now connect to the route.** Auto-generated polylines (no explicit `routes[]`) now anchor Day 1 to `trip.origin` and the final day back to the destination (or origin, for a round trip). Previously the green "A" Start pin floated unattached — most visible when the last day's lodging is `name: "Home"` at the origin, which the route generator excludes from geometry.
+
 ## [1.3.0] — 2026-04-30
 
 ### Added
