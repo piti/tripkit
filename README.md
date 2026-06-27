@@ -90,6 +90,8 @@ Step 1 reads EXIF GPS + timestamps and auto-matches each photo to the nearest st
 
 `src` values can be relative paths (the default) **or** URLs — use URLs if you want the output to stay a single shareable HTML file.
 
+📖 **Full walkthrough:** [docs/MEDIA-GUIDE.md](docs/MEDIA-GUIDE.md) — the review-file format, how matching works, letting an AI agent caption and place your photos, and troubleshooting.
+
 ### Option 3: With an AI Agent (everyone)
 
 1. Start a conversation with your preferred AI agent (Claude recommended)

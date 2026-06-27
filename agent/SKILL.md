@@ -50,6 +50,8 @@ After the trip, the traveler can attach their real geotagged photos/videos to st
 
 Captions are the high-value artifact here — they're what the lightbox shows. Keep them concise and grounded in what's actually visible.
 
+Full reference (review-file format, matching rules, edge cases): `docs/MEDIA-GUIDE.md`.
+
 ## Schema Reference (must match `schema/tripkit.schema.yaml`)
 
 ### `trip` block

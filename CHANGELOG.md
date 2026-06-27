@@ -12,6 +12,7 @@ All notable changes to TripKit are documented here. Versioning follows [SemVer](
   - **Renderer:** stop cards and map popups show a thumbnail strip + a `📷 N` count badge; **stop markers with media get a corner `📷 N` badge that opens the lightbox directly** (the marker body still opens the normal popup); a full-screen **lightbox** (keyboard ←/→/Esc, click, swipe; inline video playback) opens from any thumbnail; a toggleable **photo-pin map layer** plots every media item that carries its own EXIF GPS, distinct from the day-numbered stop markers.
   - **Validation:** `tripkit validate` checks each media item has a `src` and valid `type`, and warns when a media item's GPS is >25 mi from its stop (likely a wrong match).
   - **Agent skill:** new Phase 5 documents the post-trip ingest → review → apply flow, with the agent owning the captioning/match-fixing review step.
+  - **Guide:** `docs/MEDIA-GUIDE.md` — end-to-end walkthrough (CLI steps, the review-file format field by field, AI-agent orchestration, the `media` schema, URLs vs local files, troubleshooting, command reference). Linked from the README and the agent skill.
 - Dependencies: `exifr` (required for ingest) added to `dependencies`; `sharp` (thumbnails) added to `optionalDependencies`.
 
 ### Fixed
