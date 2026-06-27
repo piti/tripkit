@@ -41,6 +41,15 @@ The plan WILL change. Track every change in `agent_context.iteration_log` with d
 - **Real-time adaptation** — weather changes, road closures, fatigue.
 - **Schedule conflicts** — work meetings, reservations.
 
+### Phase 5: Post-trip media (optional)
+After the trip, the traveler can attach their real geotagged photos/videos to stops so the map shows what they actually saw. This is a **review-in-the-middle** flow — your job is the "review" step:
+
+1. **Build** — the user runs `tripkit media <media-folder> <trip>.yaml`. This reads EXIF GPS + timestamps, auto-matches each item to the nearest stop on the matching day (haversine), generates thumbnails if `sharp` is installed, and writes `<trip>.media-review.yaml`. Items with no GPS, no stops on the day, or a nearest stop too far away land in an `unmatched:` bucket.
+2. **Review (your role)** — open the review file. For each item: write a short, specific `caption` (what it shows, not "photo 1"). Fix any mis-matched `stop_index`. For `unmatched` items, reason from the filename, `taken_at`, and the trip plan to assign a `day` + `stop_index` — or leave them unmatched if genuinely unplaceable. Use the `suggested_stop`/`reason` hints.
+3. **Apply** — the user runs `tripkit media apply <trip>.media-review.yaml <trip>.yaml` to merge the reviewed items into `stops[].media[]`, then re-renders. Apply is idempotent (re-running won't duplicate).
+
+Captions are the high-value artifact here — they're what the lightbox shows. Keep them concise and grounded in what's actually visible.
+
 ## Schema Reference (must match `schema/tripkit.schema.yaml`)
 
 ### `trip` block
@@ -74,6 +83,7 @@ Each day:
 - `reservation_required: bool` + `reservation_url` — for permit/timed-entry stops.
 - `image` — Unsplash or other URL. If omitted, the renderer falls back to a type-specific default.
 - `navigate_url` — Google Maps directions link.
+- `media: [...]` — **post-trip only.** A gallery of the traveler's actual photos/videos at this stop. Usually populated by the `tripkit media` ingest flow (see Phase 5), not hand-authored during planning. Each item: `{ src, type: photo|video, thumb?, caption?, lat?, lng?, taken_at? }`. `src` is a relative path or URL. Items with `lat`/`lng` also drive the renderer's toggleable photo-pin map layer.
 
 ### `routes[]` block (optional but strongly recommended for road trips)
 Each entry:

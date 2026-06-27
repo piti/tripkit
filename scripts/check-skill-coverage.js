@@ -27,7 +27,7 @@ const REQUIRED_FIELDS = [
   // stops
   'stops[].name', 'stops[].lat', 'stops[].lng', 'stops[].type', 'stops[].label',
   'stops[].description', 'stops[].kid_friendly', 'stops[].reservation_required',
-  'stops[].navigate_url',
+  'stops[].navigate_url', 'stops[].media',
   // lodging
   'lodging.name', 'lodging.lat', 'lodging.lng', 'lodging.confirmation', 'lodging.booked',
   // routes

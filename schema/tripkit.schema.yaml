@@ -62,6 +62,7 @@ days:
       lng: number
       notes: string           # Free-form: pool, breakfast, special features
       navigate_url: string    # Google Maps nav link
+      media:                  # Optional — same shape as stops[].media (see below). Post-trip photos of the stay.
 
     alerts:                   # Optional array of important warnings
       - string                # e.g. "⏰ Dad has a 7:30 PM meeting..."
@@ -85,6 +86,23 @@ days:
         hours: string         # e.g. "Dawn to dusk" (optional)
         kid_friendly: boolean # Optional
         accessibility: string # Optional — wheelchair, stroller notes
+
+        # POST-TRIP MEDIA (optional) — actual photos/videos captured at this stop.
+        # Populated by `tripkit media <folder> <trip.yaml>` from geotagged files,
+        # reviewed/captioned, then merged with `tripkit media apply`. Purely additive:
+        # stops without `media` render exactly as before. `image` above remains the
+        # single hero/primary image; `media` is the gallery shown in cards, popups,
+        # the lightbox, and (when items carry lat/lng) the toggleable photo-pin layer.
+        media:
+          - src: string         # Relative path (e.g. "media/IMG_2401.jpg") OR full URL.
+                                #   URLs keep the output a shareable single file.
+            type: string        # "photo" | "video"
+            thumb: string       # Optional pre-generated thumbnail path/URL (sharp, if available);
+                                #   renderer falls back to `src` when absent.
+            caption: string     # Optional human/agent caption shown in the lightbox
+            lat: number         # Optional — original EXIF GPS; drives the photo-pin map layer
+            lng: number
+            taken_at: string    # Optional — EXIF timestamp (ISO 8601), used for day matching
 
 # ============================================================
 # ROUTES — map polylines connecting stops

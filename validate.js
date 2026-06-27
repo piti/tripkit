@@ -6,6 +6,9 @@
  */
 
 const STOP_TYPES = new Set(['hike', 'scenic', 'food', 'city', 'activity', 'beach', 'museum', 'shopping']);
+const MEDIA_TYPES = new Set(['photo', 'video']);
+// Distance above which a media item's own GPS looks suspiciously far from its stop.
+const MEDIA_FAR_MILES = 25;
 const DAY_STATUS = new Set(['completed', 'active', 'upcoming']);
 const MAP_STYLES = new Set(['terrain', 'satellite', 'topo', 'street']);
 const HEX = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
@@ -46,6 +49,29 @@ function dayStartAnchor(d) {
 
 // Threshold above which a single straight-line polyline segment looks visually disjointed.
 const LONG_LEG_MILES = 250;
+
+// Validate an optional media[] array (on a stop or lodging). `anchor` is the
+// [lat, lng] of the owning stop/lodging, used to flag wildly-off media GPS.
+function validateMedia(media, basePath, anchor, err, warn) {
+  if (media == null) return;
+  if (!Array.isArray(media)) { err(`${basePath}.media`, 'must be an array when present'); return; }
+  media.forEach((m, mi) => {
+    const mp = `${basePath}.media[${mi}]`;
+    if (!m || typeof m !== 'object') { err(mp, 'must be an object'); return; }
+    if (!isNonEmptyString(m.src)) err(`${mp}.src`, 'required, non-empty string (relative path or URL)');
+    if (m.type != null && !MEDIA_TYPES.has(m.type)) {
+      err(`${mp}.type`, `must be one of ${[...MEDIA_TYPES].join(', ')}; got "${m.type}"`);
+    }
+    if (m.lat != null && (!isFiniteNumber(m.lat) || m.lat < -90 || m.lat > 90)) err(`${mp}.lat`, `must be a number in [-90, 90]; got ${m.lat}`);
+    if (m.lng != null && (!isFiniteNumber(m.lng) || m.lng < -180 || m.lng > 180)) err(`${mp}.lng`, `must be a number in [-180, 180]; got ${m.lng}`);
+    if (anchor && isFiniteNumber(m.lat) && isFiniteNumber(m.lng)) {
+      const miles = distanceMiles(anchor[0], anchor[1], m.lat, m.lng);
+      if (miles > MEDIA_FAR_MILES) {
+        warn(`${mp}`, `media GPS is ${Math.round(miles)} mi from its stop — likely matched to the wrong stop`);
+      }
+    }
+  });
+}
 
 function validate(data) {
   const errors = [];
@@ -132,6 +158,8 @@ function validate(data) {
           if (s.kid_friendly != null && typeof s.kid_friendly !== 'boolean') {
             err(`${sp}.kid_friendly`, 'must be boolean');
           }
+          const anchor = isFiniteNumber(s.lat) && isFiniteNumber(s.lng) ? [s.lat, s.lng] : null;
+          validateMedia(s.media, sp, anchor, err, warn);
         });
       }
     }
@@ -153,6 +181,8 @@ function validate(data) {
       if (d.lodging.booked && !isHome && !isNonEmptyString(d.lodging.confirmation)) {
         warn(`${lp}.confirmation`, 'lodging is marked booked but confirmation is empty');
       }
+      const lodgeAnchor = isFiniteNumber(lat) && isFiniteNumber(lng) ? [lat, lng] : null;
+      validateMedia(d.lodging.media, lp, lodgeAnchor, err, warn);
     }
   });
 

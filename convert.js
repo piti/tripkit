@@ -29,6 +29,10 @@ TripKit — AI-friendly trip planning toolkit
 Usage:
   ${invokedAs} <trip.yaml> [output.html]    Render YAML to interactive HTML
   ${invokedAs} validate <trip.yaml>         Check a trip YAML for schema errors
+  ${invokedAs} media <folder> <trip.yaml>   Geo-match a folder of trip photos/videos to
+                                            stops and write <trip>.media-review.yaml
+  ${invokedAs} media apply <review.yaml> <trip.yaml>
+                                            Merge a reviewed media file into the trip YAML
   ${invokedAs} install-skill [--project]    Install the agent skill for Claude Code
                                             (default: ~/.claude/skills/tripkit/;
                                              --project: ./.claude/skills/tripkit/)
@@ -114,6 +118,45 @@ if (args[0] === 'validate') {
   console.log('');
   console.log(`  ${errors.length} error${errors.length === 1 ? '' : 's'}, ${warnings.length} warning${warnings.length === 1 ? '' : 's'}`);
   process.exit(errors.length > 0 ? 1 : 0);
+}
+
+// === SUBCOMMAND: media (ingest geotagged photos/videos) ===
+if (args[0] === 'media') {
+  const io = {
+    log: (m) => console.log(m),
+    warn: (m) => console.error(`  ${c.yellow('⚠')} ${m}`),
+    c,
+  };
+  const { buildReview, applyReview } = require('./media-ingest');
+
+  (async () => {
+    try {
+      if (args[1] === 'apply') {
+        const reviewFile = args[2];
+        const tripFile = args[3];
+        if (!reviewFile || !tripFile) {
+          console.error(c.red('Usage: ') + `${invokedAs} media apply <review.yaml> <trip.yaml>`);
+          process.exit(1);
+        }
+        if (!fs.existsSync(reviewFile)) { console.error(c.red(`Error: file not found: ${reviewFile}`)); process.exit(1); }
+        if (!fs.existsSync(tripFile)) { console.error(c.red(`Error: file not found: ${tripFile}`)); process.exit(1); }
+        await applyReview(reviewFile, tripFile, io);
+      } else {
+        const folder = args[1];
+        const tripFile = args[2];
+        if (!folder || !tripFile) {
+          console.error(c.red('Usage: ') + `${invokedAs} media <folder> <trip.yaml>`);
+          process.exit(1);
+        }
+        if (!fs.existsSync(tripFile)) { console.error(c.red(`Error: file not found: ${tripFile}`)); process.exit(1); }
+        await buildReview(folder, tripFile, io);
+      }
+    } catch (e) {
+      console.error(c.red('✖ ') + e.message);
+      process.exit(1);
+    }
+  })();
+  return;
 }
 
 // === DEFAULT: render ===

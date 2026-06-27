@@ -75,6 +75,21 @@ npx tripkit validate my-trip.yaml
 
 It checks required fields, lat/lng ranges, valid stop types, hex colors, day numbering, and warns when `trip.total_stops` doesn't match the actual count. Validation also runs automatically before each render — pass `--no-validate` to skip it.
 
+### Add your trip photos (after the trip)
+
+Turn a folder of geotagged photos/videos into an interactive map where each stop shows what you actually captured:
+
+```bash
+npx tripkit media ./my-photos my-trip.yaml      # 1. EXIF-match photos to stops → writes my-trip.media-review.yaml
+#    edit captions / fix any mismatches in the review file
+npx tripkit media apply my-trip.media-review.yaml my-trip.yaml   # 2. merge into the trip
+npx tripkit my-trip.yaml my-trip.html           # 3. re-render with galleries
+```
+
+Step 1 reads EXIF GPS + timestamps and auto-matches each photo to the nearest stop on the matching day. Items it can't place confidently (no GPS, too far from any stop) land in an `unmatched:` bucket you can fix by hand — or hand to an AI agent to caption and place. Thumbnails are generated automatically if [`sharp`](https://www.npmjs.com/package/sharp) is installed (optional). In the rendered page, stops gain a photo strip + count badge, a full-screen lightbox (arrow keys / swipe, inline video), and a toggleable map layer pinning every geotagged shot.
+
+`src` values can be relative paths (the default) **or** URLs — use URLs if you want the output to stay a single shareable HTML file.
+
 ### Option 3: With an AI Agent (everyone)
 
 1. Start a conversation with your preferred AI agent (Claude recommended)
@@ -155,6 +170,13 @@ See `schema/tripkit.schema.yaml` for the complete specification.
 - Branded hotel markers with confirmation numbers
 - Click a day → map zooms to that segment
 - Click a stop → map zooms and opens popup
+
+### Trip Photos & Videos
+- `tripkit media` ingests a folder of geotagged photos/videos and EXIF-matches them to stops
+- Per-stop photo strip + count badge in cards and map popups
+- Full-screen lightbox: arrow keys / swipe to navigate, inline video playback
+- Toggleable map layer that pins every geotagged shot at its own location
+- Photos stay as relative paths or URLs — the output can still be a single shareable file
 
 ### Day-by-Day Sidebar
 - Weather callouts with forecasts

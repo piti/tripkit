@@ -136,6 +136,36 @@ body{font-family:var(--font);background:var(--bg);color:var(--text)}
 .endpin span{transform:rotate(45deg);letter-spacing:.02em}
 .endpin.start{background:#1b5e3b}
 .endpin.end{background:#7a1f1f}
+/* --- Media gallery (sidebar strip + count badge) --- */
+.stop-media{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
+.stop-media .gthumb{width:46px;height:46px;border-radius:6px;object-fit:cover;cursor:pointer;background:var(--bg);border:1px solid var(--border);transition:transform .12s}
+.stop-media .gthumb:hover{transform:scale(1.06)}
+.stop-media .gmore{display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:6px;background:var(--accent-soft);color:var(--accent);font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--border)}
+.gthumb-wrap{position:relative;display:inline-block;line-height:0}
+.gthumb-wrap .vbadge{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:0;height:0;border-left:11px solid #fff;border-top:7px solid transparent;border-bottom:7px solid transparent;filter:drop-shadow(0 0 2px rgba(0,0,0,.6));pointer-events:none}
+.pp-media{display:flex;gap:4px;padding:8px 14px 0;flex-wrap:wrap}
+.pp-media .gthumb{width:40px;height:40px;border-radius:5px;object-fit:cover;cursor:pointer;border:1px solid var(--border)}
+.media-count{display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:600;color:var(--accent);background:var(--accent-soft);padding:1px 6px;border-radius:10px;margin-left:4px}
+/* --- Photo-pin marker --- */
+.photopin{width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid var(--accent);box-shadow:0 1px 4px rgba(0,0,0,.4);cursor:pointer;transition:transform .12s}
+.photopin:hover{transform:scale(1.35)}
+.mbtn.toggle.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+/* --- Lightbox --- */
+.lightbox{position:fixed;inset:0;z-index:5000;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;flex-direction:column}
+.lightbox.open{display:flex;animation:lbFade .2s ease}
+@keyframes lbFade{from{opacity:0}to{opacity:1}}
+.lb-stage{position:relative;max-width:92vw;max-height:78vh;display:flex;align-items:center;justify-content:center}
+.lb-stage img,.lb-stage video{max-width:92vw;max-height:78vh;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,.6);object-fit:contain;background:#000}
+.lb-cap{color:#f0ede4;font-family:var(--font);font-size:13px;text-align:center;margin-top:14px;max-width:80vw;line-height:1.5;min-height:18px}
+.lb-meta{color:#908a78;font-size:11px;margin-top:4px}
+.lb-count{position:absolute;top:20px;left:0;right:0;text-align:center;color:#cbc8bd;font-size:12px;font-family:var(--font);letter-spacing:.04em}
+.lb-close{position:absolute;top:16px;right:22px;width:38px;height:38px;border:none;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:20px;cursor:pointer;line-height:1}
+.lb-close:hover{background:rgba(255,255,255,.24)}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border:none;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.lb-nav:hover{background:rgba(255,255,255,.24)}
+.lb-prev{left:18px}.lb-next{right:18px}
+.lb-nav[disabled]{opacity:.25;cursor:default}
+@media(max-width:480px){.lb-nav{width:40px;height:40px;font-size:20px}.lb-close{top:10px;right:12px}}
 @media(max-width:480px){
   .hero{height:140px}.hero-text{padding:12px 14px}.hero-text h1{font-size:20px}
   .day-nav{padding:8px 10px;gap:1px}.day-btn{padding:5px 8px;font-size:10px}
@@ -165,6 +195,15 @@ body{font-family:var(--font);background:var(--bg);color:var(--text)}
 <div class="legend" id="legend"></div>
 <button class="fullbtn" onclick="showAll()">Full route</button>
 </div></div>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lb-close" id="lbClose" aria-label="Close">×</button>
+  <div class="lb-count" id="lbCount"></div>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">‹</button>
+  <div class="lb-stage" id="lbStage"></div>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Next">›</button>
+  <div class="lb-cap" id="lbCap"></div>
+  <div class="lb-meta" id="lbMeta"></div>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
 // ============================================================
@@ -213,6 +252,39 @@ const TRIP_DATA = {};
 
   function getImage(stop) {
     return stop.image || defaultImages[stop.type] || defaultImages.default;
+  }
+
+  // --- Post-trip media helpers ---
+  // Normalize a stop's media[] into a clean list. `src`/`thumb` may be a relative
+  // path or a URL; the renderer just assigns them as element src/href either way.
+  function getStopMedia(stop) {
+    if (!Array.isArray(stop.media)) return [];
+    return stop.media.filter(m => m && m.src).map(m => ({
+      src: m.src,
+      thumb: m.thumb || m.src,
+      type: m.type === 'video' ? 'video' : 'photo',
+      caption: m.caption || '',
+      lat: Number.isFinite(m.lat) ? m.lat : null,
+      lng: Number.isFinite(m.lng) ? m.lng : null,
+      taken_at: m.taken_at || ''
+    }));
+  }
+  function escAttr(s) { return String(s).replace(/"/g, '&quot;'); }
+  function escHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+  // Build the sidebar thumbnail strip for a stop's media (up to 4 shown + "+N").
+  function mediaStripHTML(di, si, media) {
+    if (!media.length) return '';
+    const MAX = 4;
+    let html = '<div class="stop-media">';
+    media.slice(0, MAX).forEach((m, mi) => {
+      html += `<span class="gthumb-wrap"><img class="gthumb" src="${escAttr(m.thumb)}" alt="${escAttr(m.caption || 'photo')}" loading="lazy" onclick="event.stopPropagation();openLightbox(${di},${si},${mi})" onerror="this.style.opacity=.25">${m.type === 'video' ? '<span class="vbadge"></span>' : ''}</span>`;
+    });
+    if (media.length > MAX) {
+      html += `<span class="gmore" onclick="event.stopPropagation();openLightbox(${di},${si},${MAX})">+${media.length - MAX}</span>`;
+    }
+    html += '</div>';
+    return html;
   }
 
   function getDayHero(day) {
@@ -306,13 +378,16 @@ const TRIP_DATA = {};
         h += `<div class="stop" onclick="tripFocus(${i},${si})">`;
         h += `<img class="stop-img" src="${img}" alt="${s.name}" loading="lazy" onerror="this.style.opacity=0">`;
         h += `<div class="stop-body">`;
-        h += `<div class="stop-name"><span class="badge ${bc}">${s.label || s.type}</span>${s.name}</div>`;
+        const sMedia = getStopMedia(s);
+        const countBadge = sMedia.length ? `<span class="media-count">📷 ${sMedia.length}</span>` : '';
+        h += `<div class="stop-name"><span class="badge ${bc}">${s.label || s.type}</span>${s.name}${countBadge}</div>`;
         h += `<div class="stop-desc">${s.description || ''}</div>`;
         const meta = [];
         if (s.duration) meta.push(`⏱ ${s.duration}`);
         if (s.parking_fee) meta.push(`🅿 ${s.parking_fee}`);
         if (s.kid_friendly === false) meta.push(`⚠ Not kid-friendly`);
         if (meta.length) h += `<div class="stop-meta">${meta.map(m => `<span>${m}</span>`).join('')}</div>`;
+        h += mediaStripHTML(i, si, sMedia);
         h += `</div></div>`;
       });
     }
@@ -407,15 +482,26 @@ const TRIP_DATA = {};
         iconSize: [26, 26], iconAnchor: [13, 13]
       });
       const m = L.marker([s.lat, s.lng], { icon }).addTo(map);
-      const img = getImage(s);
+      const sMedia = getStopMedia(s);
+      // Lead the popup with the first real photo when available; else the hero/Unsplash image.
+      const img = sMedia.length ? sMedia[0].thumb : getImage(s);
+      let ppMedia = '';
+      if (sMedia.length) {
+        ppMedia = '<div class="pp-media">';
+        sMedia.slice(0, 5).forEach((mm, mi) => {
+          ppMedia += `<span class="gthumb-wrap"><img class="gthumb" src="${escAttr(mm.thumb)}" alt="${escAttr(mm.caption || 'photo')}" onclick="openLightbox(${di},${si},${mi})" onerror="this.style.opacity=.25">${mm.type === 'video' ? '<span class="vbadge"></span>' : ''}</span>`;
+        });
+        ppMedia += '</div>';
+      }
       m.bindPopup(`<div>
-        <img class="pp-img" src="${img}" alt="${s.name}" onerror="this.style.opacity=0">
+        <img class="pp-img" src="${escAttr(img)}" alt="${escAttr(s.name)}" ${sMedia.length ? `style="cursor:pointer" onclick="openLightbox(${di},${si},0)"` : ''} onerror="this.style.opacity=0">
         <div class="pp-body">
           <div class="pp-day">Day ${d.number} · ${d.date}</div>
           <div class="pp-name">${s.name}</div>
           <div class="pp-desc">${s.description || ''}</div>
           ${s.navigate_url ? `<a href="${s.navigate_url}" target="_blank" style="display:inline-block;margin-top:6px;font-size:11px;color:var(--accent);text-decoration:none">📍 Navigate →</a>` : ''}
         </div>
+        ${ppMedia}
       </div>`, { maxWidth: 280 });
       m.on('click', () => sel(di));
       dm.push(m);
@@ -550,6 +636,111 @@ const TRIP_DATA = {};
   window.showAll = function () {
     map.fitBounds(fullBounds, { animate: true });
   };
+
+  // === LIGHTBOX ===
+  // Resolve a stop's media list on demand so it always reflects current data.
+  const lb = document.getElementById('lightbox');
+  const lbStage = document.getElementById('lbStage');
+  const lbCap = document.getElementById('lbCap');
+  const lbMeta = document.getElementById('lbMeta');
+  const lbCount = document.getElementById('lbCount');
+  const lbPrev = document.getElementById('lbPrev');
+  const lbNext = document.getElementById('lbNext');
+  let lbList = [];
+  let lbIdx = 0;
+
+  function lbRender() {
+    const m = lbList[lbIdx];
+    if (!m) return;
+    lbStage.innerHTML = m.type === 'video'
+      ? `<video src="${escAttr(m.src)}" controls autoplay playsinline></video>`
+      : `<img src="${escAttr(m.src)}" alt="${escAttr(m.caption || 'photo')}">`;
+    lbCap.textContent = m.caption || '';
+    const meta = [];
+    if (m.taken_at) meta.push(new Date(m.taken_at).toString() !== 'Invalid Date' ? new Date(m.taken_at).toLocaleString() : m.taken_at);
+    if (m.lat != null && m.lng != null) meta.push(`${m.lat.toFixed(4)}, ${m.lng.toFixed(4)}`);
+    lbMeta.textContent = meta.join('  ·  ');
+    lbCount.textContent = lbList.length > 1 ? `${lbIdx + 1} / ${lbList.length}` : '';
+    lbPrev.disabled = lbIdx === 0;
+    lbNext.disabled = lbIdx === lbList.length - 1;
+  }
+  function lbStep(delta) {
+    const n = lbIdx + delta;
+    if (n < 0 || n >= lbList.length) return;
+    lbIdx = n;
+    lbRender();
+  }
+  function lbClose() {
+    lb.classList.remove('open');
+    lbStage.innerHTML = ''; // stop any playing video
+  }
+  // Open from a stop (di, si) at media index mi, or from an explicit list.
+  window.openLightbox = function (di, si, mi) {
+    lbList = getStopMedia(days[di].stops[si]);
+    if (!lbList.length) return;
+    lbIdx = Math.max(0, Math.min(mi || 0, lbList.length - 1));
+    lb.classList.add('open');
+    lbRender();
+  };
+  window.openLightboxList = function (list, idx) {
+    lbList = list;
+    if (!lbList.length) return;
+    lbIdx = Math.max(0, Math.min(idx || 0, lbList.length - 1));
+    lb.classList.add('open');
+    lbRender();
+  };
+  lbPrev.onclick = () => lbStep(-1);
+  lbNext.onclick = () => lbStep(1);
+  document.getElementById('lbClose').onclick = lbClose;
+  lb.addEventListener('click', (e) => { if (e.target === lb) lbClose(); });
+  document.addEventListener('keydown', (e) => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') lbClose();
+    else if (e.key === 'ArrowLeft') lbStep(-1);
+    else if (e.key === 'ArrowRight') lbStep(1);
+  });
+  // Basic swipe nav on touch devices.
+  let touchX = null;
+  lbStage.addEventListener('touchstart', (e) => { touchX = e.changedTouches[0].clientX; }, { passive: true });
+  lbStage.addEventListener('touchend', (e) => {
+    if (touchX == null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 40) lbStep(dx < 0 ? 1 : -1);
+    touchX = null;
+  }, { passive: true });
+
+  // === PHOTO-PIN LAYER ===
+  // Each media item that carries its own EXIF lat/lng becomes a small pin,
+  // distinct from the day-numbered stop markers. Toggleable via the map control.
+  const photoLayer = L.layerGroup();
+  let photoLayerOn = false;
+  days.forEach((d, di) => {
+    (d.stops || []).forEach((s, si) => {
+      getStopMedia(s).forEach((m, mi) => {
+        if (m.lat == null || m.lng == null) return;
+        const icon = L.divIcon({ className: '', html: '<div class="photopin"></div>', iconSize: [14, 14], iconAnchor: [7, 7] });
+        const pin = L.marker([m.lat, m.lng], { icon });
+        pin.on('click', () => window.openLightbox(di, si, mi));
+        photoLayer.addLayer(pin);
+      });
+    });
+  });
+  const photoPinCount = photoLayer.getLayers().length;
+  if (photoPinCount > 0) {
+    const btn = document.createElement('button');
+    btn.className = 'mbtn toggle';
+    btn.style.marginLeft = '6px';
+    btn.style.borderRadius = '5px';
+    btn.style.borderLeft = '1px solid var(--border)';
+    btn.textContent = `📷 Photos`;
+    btn.title = `${photoPinCount} geotagged media`;
+    btn.addEventListener('click', () => {
+      photoLayerOn = !photoLayerOn;
+      btn.classList.toggle('active', photoLayerOn);
+      if (photoLayerOn) photoLayer.addTo(map); else map.removeLayer(photoLayer);
+    });
+    document.querySelector('.map-ctrl').appendChild(btn);
+  }
 
   // Set page title
   document.title = trip.title + ' — TripKit';

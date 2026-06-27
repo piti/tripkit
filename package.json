@@ -9,6 +9,7 @@
   "files": [
     "convert.js",
     "validate.js",
+    "media-ingest.js",
     "scripts/check-skill-coverage.js",
     "renderers/html/tripkit-renderer.html",
     "schema/tripkit.schema.yaml",
@@ -52,6 +53,10 @@
     "node": ">=18"
   },
   "dependencies": {
+    "exifr": "^7.1.3",
     "js-yaml": "^4.1.0"
+  },
+  "optionalDependencies": {
+    "sharp": "^0.35.2"
   }
 }

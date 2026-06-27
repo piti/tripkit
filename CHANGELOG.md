@@ -2,6 +2,18 @@
 
 All notable changes to TripKit are documented here. Versioning follows [SemVer](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+- **Post-trip media — interactive map mode.** Attach a trip's real geotagged photos/videos to stops and see them on the map.
+  - **`tripkit media <folder> <trip.yaml>`** — scans a media folder, reads EXIF GPS + timestamps (`exifr`), auto-matches each item to the nearest stop on the matching day (haversine, day-gated by photo date), optionally generates thumbnails (`sharp`, optional dependency — gracefully skipped if absent), and writes a `<trip>.media-review.yaml` handoff file. Low-confidence / geotag-less / too-far items go to an `unmatched:` bucket for review.
+  - **`tripkit media apply <review.yaml> <trip.yaml>`** — merges the reviewed/captioned media into `stops[].media[]`. Idempotent.
+  - **Schema:** new optional `stops[].media[]` (also valid on `lodging`): `{ src, type: photo|video, thumb?, caption?, lat?, lng?, taken_at? }`. `src` is a relative path **or** a URL, so output can stay a shareable single file. Purely additive — stops without media render exactly as before.
+  - **Renderer:** stop cards and map popups show a thumbnail strip + a `📷 N` count badge; a full-screen **lightbox** (keyboard ←/→/Esc, click, swipe; inline video playback) opens from any thumbnail; a toggleable **photo-pin map layer** plots every media item that carries its own EXIF GPS, distinct from the day-numbered stop markers.
+  - **Validation:** `tripkit validate` checks each media item has a `src` and valid `type`, and warns when a media item's GPS is >25 mi from its stop (likely a wrong match).
+  - **Agent skill:** new Phase 5 documents the post-trip ingest → review → apply flow, with the agent owning the captioning/match-fixing review step.
+- Dependencies: `exifr` (required for ingest) added to `dependencies`; `sharp` (thumbnails) added to `optionalDependencies`.
+
 ## [1.3.0] — 2026-04-30
 
 ### Added

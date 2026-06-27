@@ -307,6 +307,21 @@ days:
         duration: "2–3 hrs (loop)"
         reservation_required: false
         navigate_url: "https://www.google.com/maps/dir/?api=1&destination=Multnomah+Falls+Oregon"
+        # Post-trip media demo — `src` can be a relative path (from `tripkit media`) or a URL.
+        # These carry lat/lng, so they also appear in the toggleable photo-pin map layer.
+        media:
+          - src: "https://images.unsplash.com/photo-1546587348-d12660c30c50?w=1600"
+            type: photo
+            caption: "Multnomah Falls roaring with spring snowmelt — lower viewpoint"
+            lat: 45.5762
+            lng: -122.1158
+            taken_at: "2026-04-07T14:32:00"
+          - src: "https://images.unsplash.com/photo-1559521783-1d1599583485?w=1600"
+            type: photo
+            caption: "Benson Bridge between the upper and lower falls"
+            lat: 45.5765
+            lng: -122.1155
+            taken_at: "2026-04-07T14:40:00"
 
       - name: "Latourell Falls"
         lat: 45.537
