@@ -2,7 +2,7 @@
 
 All notable changes to TripKit are documented here. Versioning follows [SemVer](https://semver.org/).
 
-## [Unreleased]
+## [1.4.0] — 2026-06-27
 
 ### Added
 - **Post-trip media — interactive map mode.** Attach a trip's real geotagged photos/videos to stops and see them on the map.
