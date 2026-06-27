@@ -11,6 +11,7 @@
     "validate.js",
     "media-ingest.js",
     "scripts/check-skill-coverage.js",
+    "scripts/test-media-lifecycle.js",
     "renderers/html/tripkit-renderer.html",
     "schema/tripkit.schema.yaml",
     "examples/oregon-spring-2026.yaml",
@@ -26,7 +27,7 @@
   "scripts": {
     "convert": "node convert.js",
     "example": "node convert.js examples/oregon-spring-2026.yaml examples/oregon-spring-2026.html",
-    "test": "node convert.js examples/oregon-spring-2026.yaml /tmp/tripkit-test.html && test -s /tmp/tripkit-test.html && node scripts/check-skill-coverage.js && echo 'OK'",
+    "test": "node convert.js examples/oregon-spring-2026.yaml /tmp/tripkit-test.html && test -s /tmp/tripkit-test.html && node scripts/check-skill-coverage.js && node scripts/test-media-lifecycle.js && echo 'OK'",
     "prepublishOnly": "npm test"
   },
   "keywords": [
