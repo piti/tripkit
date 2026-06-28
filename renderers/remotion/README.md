@@ -1,8 +1,10 @@
 # TripKit Video Renderer (Remotion)
 
-Turn a media-populated `trip.yaml` into a narrated trip-recap MP4 — a map that
-flies between stops drawing the route, photo montages, title cards, subtitles,
-music, and optional first-person narration.
+Turn a media-populated `trip.yaml` into a narrated trip-recap MP4 — an opening
+hero card showing the whole route, then a map that flies between stops drawing
+one continuous route line, photo montages, title cards, subtitles, music, and
+optional first-person narration. Each render also writes a `*.thumb.jpg` poster
+frame for use as a social/preview thumbnail.
 
 > **Opt-in & heavy.** This is a separate package from core `tripkit`. It pulls in
 > Remotion, React, a headless-Chrome build, and ffmpeg. Install only if you want video.
@@ -41,5 +43,17 @@ Flags: `--narrate` (needs `TRIPKIT_TTS_KEY`), `--music <file|ai>` (`ai` needs
   provider whose terms permit rendered/exported media, with attribution shown
   on-screen. **Esri** public tiles (`--tiles esri`) are **non-commercial only** —
   don't monetize Esri-tiled output.
-- Replace `assets/music/default.mp3` with a real royalty-free track before
-  distributing (the committed file is a placeholder).
+- `assets/music/default.mp3` is a royalty-free ambient track, safe to
+  distribute. Swap in your own with `--music <file>` for a different mood.
+
+## Example
+
+A ready-to-render showcase trip lives in [`examples/yosemite-weekend/`](examples/yosemite-weekend/)
+— a 2-day, 4-stop Yosemite trip with location-accurate photos
+([Wikimedia Commons](examples/yosemite-weekend/media/CREDITS.md), freely licensed):
+
+```bash
+npm run video -- examples/yosemite-weekend/yosemite-weekend.yaml yosemite.mp4 --tiles esri
+```
+
+Produces `yosemite.mp4` (the recap video) and `yosemite.thumb.jpg` (the poster frame).

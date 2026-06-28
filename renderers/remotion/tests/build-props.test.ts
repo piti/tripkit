@@ -38,6 +38,37 @@ describe('buildProps', () => {
     expect(props.segments[1].fromPx).not.toBeNull();
   });
 
+  it('builds cumulative routes: each segment extends the prior path', async () => {
+    const props = await buildProps({
+      trip, narration: [], provider, tts: null, music: null, assetsDir: '/tmp/a', fps: 30,
+    }, noNarration);
+    // origin + N stops: segment i's polyline has (origin?1:0)+i+1 vertices.
+    // origin present, so seg0 has 2 points (origin->stop0), seg1 has 3, seg2 has 4.
+    expect(props.segments[0].routePx).toHaveLength(2);
+    expect(props.segments[1].routePx).toHaveLength(3);
+    expect(props.segments[2].routePx).toHaveLength(4);
+    // seg0 draws origin->stop0 from scratch (nothing prior), so revealFrom is 0.
+    // Each later segment starts with its prior legs already drawn — revealFrom is the
+    // fraction of THAT segment's own (re-projected) polyline already covered, so it's
+    // strictly inside (0,1). It is not comparable across segments (each has its own zoom).
+    expect(props.segments[0].revealFrom).toBe(0);
+    for (const seg of props.segments.slice(1)) {
+      expect(seg.revealFrom).toBeGreaterThan(0);
+      expect(seg.revealFrom).toBeLessThan(1);
+    }
+  });
+
+  it('produces an intro hero card with the full route and dates', async () => {
+    const props = await buildProps({
+      trip, narration: [], provider, tts: null, music: null, assetsDir: '/tmp/a', fps: 30,
+    }, noNarration);
+    expect(props.intro).not.toBeNull();
+    // origin + 3 stops = 4 vertices on the full route.
+    expect(props.intro!.routePx).toHaveLength(4);
+    expect(props.intro!.durationInFrames).toBeGreaterThan(0);
+    expect(props.dates).toBe('May 15-16, 2026');
+  });
+
   it('syncs a narrated segment duration to the narration length', async () => {
     const narration = [{ day: 1, stop_index: 0, stop: 'Lower Yosemite Fall', script: 'we hiked to the roaring falls today' }];
     const deps = {

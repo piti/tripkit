@@ -42,10 +42,16 @@ describe('music resolver', () => {
     expect(existsSync(p as string)).toBe(true);
   });
 
-  it('returns a user-supplied file path as-is', async () => {
-    const supplied = join(here, 'fixtures', 'mini-trip.yaml'); // any existing file
+  it('returns a user-supplied audio file path as-is', async () => {
+    const supplied = join(here, '..', 'assets', 'music', 'default.mp3'); // a real audio file
     const p = await resolveMusic(supplied, {} as never, '/tmp');
     expect(p).toBe(supplied);
+  });
+
+  it('skips a supplied non-audio file (returns null) instead of crashing the render', async () => {
+    const notAudio = join(here, 'fixtures', 'mini-trip.yaml'); // a YAML, not audio
+    const p = await resolveMusic(notAudio, {} as never, '/tmp');
+    expect(p).toBeNull();
   });
 
   it('errors on --music ai without a key', async () => {

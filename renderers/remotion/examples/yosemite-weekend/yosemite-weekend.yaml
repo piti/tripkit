@@ -1,0 +1,62 @@
+trip:
+  title: "Yosemite Weekend 2026"
+  subtitle: "Granite · Waterfalls · Sequoias"
+  dates: "May 15-16, 2026"
+  total_days: 2
+  total_stops: 4
+  origin: "Fresno, CA"
+  origin_lat: 36.7378
+  origin_lng: -119.7871
+days:
+  - number: 1
+    title: "Valley Floor"
+    date: "Friday, May 15"
+    color: "#2e7db5"
+    stops:
+      - name: "Lower Yosemite Fall"
+        lat: 37.7561
+        lng: -119.5966
+        type: hike
+        description: "Easy 1-mile loop to the base of the lower fall, roaring with May snowmelt."
+        media:
+          - src: "media/lower_yosemite_fall_1600.jpg"
+            type: photo
+            caption: "Lower Yosemite Fall from the footbridge"
+          - src: "media/yosemite_falls_1600.jpg"
+            type: photo
+            caption: "The full 2,425-ft drop of Yosemite Falls"
+      - name: "Tunnel View"
+        lat: 37.7159
+        lng: -119.6770
+        type: scenic
+        description: "The classic Yosemite panorama — El Capitan, Half Dome, Bridalveil Fall in one frame."
+        media:
+          - src: "media/tunnel_view_1600.jpg"
+            type: photo
+            caption: "El Capitan and Half Dome from Tunnel View"
+  - number: 2
+    title: "Mariposa Grove"
+    date: "Saturday, May 16"
+    color: "#2d7a50"
+    stops:
+      - name: "Mariposa Grove of Giant Sequoias"
+        lat: 37.5142
+        lng: -119.6010
+        type: hike
+        description: "Giant sequoias on the lower grove loop, including the Grizzly Giant."
+        media:
+          - src: "media/grizzly_giant_1600.jpg"
+            type: photo
+            caption: "The Grizzly Giant — ~2,000 years old"
+      - name: "Glacier Point"
+        lat: 37.7275
+        lng: -119.5734
+        type: scenic
+        description: "Half Dome at eye level and a straight-down view of the valley floor."
+        media:
+          - src: "media/glacier_point_1600.jpg"
+            type: photo
+            caption: "Half Dome from Glacier Point"
+theme:
+  accent_color: "#2e7db5"
+  map_style: terrain

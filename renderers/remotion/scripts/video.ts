@@ -3,7 +3,7 @@ import { join, dirname, resolve } from 'node:path';
 import type { SegmentProps } from '../prepare/types.js';
 import { fileURLToPath } from 'node:url';
 import { bundle } from '@remotion/bundler';
-import { selectComposition, renderMedia } from '@remotion/renderer';
+import { selectComposition, renderMedia, renderStill } from '@remotion/renderer';
 import { readTrip, readNarration } from '../prepare/read-trip.js';
 import { getTileProvider } from '../prepare/adapters/tiles.js';
 import { getTtsAdapter } from '../prepare/adapters/tts.js';
@@ -104,6 +104,13 @@ async function main() {
     onProgress: ({ progress }) => process.stdout.write(`\r  ${Math.round(progress * 100)}%`),
   });
   console.log(`\n✓ ${outPath}`);
+
+  // Export a poster/thumbnail from the intro hero frame (a few frames in, after the
+  // title has sprung up). Falls back to frame 0 for trips with no intro.
+  const thumbPath = outPath.replace(/\.mp4$/i, '') + '.thumb.jpg';
+  const thumbFrame = props.intro ? Math.min(20, props.intro.durationInFrames - 1) : 0;
+  await renderStill({ composition, serveUrl, output: thumbPath, frame: thumbFrame, inputProps: finalProps, imageFormat: 'jpeg', jpegQuality: 90 });
+  console.log(`✓ ${thumbPath} (thumbnail)`);
 }
 // Only run the CLI when this module is the entrypoint, not when imported (e.g. by tests
 // that exercise exported helpers like copyLocalPhotos).

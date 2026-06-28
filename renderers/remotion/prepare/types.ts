@@ -67,20 +67,33 @@ export interface SegmentProps {
   mapHeight: number;
   fromPx: { x: number; y: number } | null;   // previous stop pixel (camera start)
   toPx: { x: number; y: number };             // this stop pixel (camera end)
-  routePx: { x: number; y: number }[];        // polyline in map-image pixels
+  routePx: { x: number; y: number }[];        // cumulative polyline (origin..this stop) in map-image pixels
+  revealFrom: number;          // 0..1 fraction of routePx already drawn at segment start (prior legs)
   photos: string[];            // resolved photo srcs/urls
   narrationAudio: string | null;
   narrationSeconds: number | null;
   captions: CaptionToken[];
   durationInFrames: number;
 }
+// Opening hero card: the whole trip on one wide map, used as the title beat
+// and exported as the video thumbnail.
+export interface IntroProps {
+  mapImage: string;
+  mapWidth: number;
+  mapHeight: number;
+  routePx: { x: number; y: number }[];   // full origin..last-stop polyline
+  routeColor: string;
+  durationInFrames: number;
+}
 export type VideoProps = {
   title: string;
   subtitle: string;
+  dates: string;
   fps: number;
   width: number;
   height: number;
   music: string | null;
   attribution: string;
+  intro: IntroProps | null;
   segments: SegmentProps[];
 };

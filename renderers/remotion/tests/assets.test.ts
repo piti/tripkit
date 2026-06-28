@@ -9,7 +9,7 @@ function seg(photos: string[]): SegmentProps {
   return {
     day: 1, stopIndex: 0, title: 't', dayTitle: '', date: '', dayColor: '#000',
     description: '', mapImage: 'map-0.png', mapWidth: 1920, mapHeight: 1080,
-    fromPx: null, toPx: { x: 0, y: 0 }, routePx: [], photos,
+    fromPx: null, toPx: { x: 0, y: 0 }, routePx: [], revealFrom: 0, photos,
     narrationAudio: null, narrationSeconds: null, captions: [], durationInFrames: 120,
   };
 }

@@ -49,6 +49,30 @@ export function computeSegmentView(
   };
 }
 
+// Pick the highest zoom at which ALL points (plus padding) fit — used for the
+// opening hero map that shows the whole trip route at once.
+export function computeFullView(
+  points: { lat: number; lng: number }[],
+  opts: { width: number; height: number; padding?: number }
+): SegmentView {
+  const pad = opts.padding ?? 0.35;
+  const pts = points.length ? points : [{ lat: 0, lng: 0 }];
+  for (let zoom = MAX_ZOOM; zoom >= MIN_ZOOM; zoom--) {
+    const worlds = pts.map((p) => latLngToWorld(p.lat, p.lng, zoom));
+    const minX = Math.min(...worlds.map((w) => w.x));
+    const maxX = Math.max(...worlds.map((w) => w.x));
+    const minY = Math.min(...worlds.map((w) => w.y));
+    const maxY = Math.max(...worlds.map((w) => w.y));
+    if (maxX - minX <= opts.width * (1 - pad) && maxY - minY <= opts.height * (1 - pad)) {
+      const cx = (minX + maxX) / 2;
+      const cy = (minY + maxY) / 2;
+      return { zoom, origin: { x: cx - opts.width / 2, y: cy - opts.height / 2 }, width: opts.width, height: opts.height };
+    }
+  }
+  const w = latLngToWorld(pts[0].lat, pts[0].lng, MIN_ZOOM);
+  return { zoom: MIN_ZOOM, origin: { x: w.x - opts.width / 2, y: w.y - opts.height / 2 }, width: opts.width, height: opts.height };
+}
+
 export function projectRoute(
   points: { lat: number; lng: number }[],
   zoom: number,
