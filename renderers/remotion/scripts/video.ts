@@ -1,5 +1,6 @@
 import { writeFileSync, mkdirSync, cpSync, existsSync } from 'node:fs';
 import { join, dirname, resolve } from 'node:path';
+import type { SegmentProps } from '../prepare/types.js';
 import { fileURLToPath } from 'node:url';
 import { bundle } from '@remotion/bundler';
 import { selectComposition, renderMedia } from '@remotion/renderer';
@@ -19,6 +20,25 @@ function flag(name: string): string | undefined {
   return i >= 0 ? process.argv[i + 1] : undefined;
 }
 function has(name: string): boolean { return process.argv.includes(`--${name}`); }
+
+/**
+ * Copy each segment's LOCAL (non-http) photo into the served assets dir, preserving its
+ * relative subpath, so the composition's staticFile(`generated/<src>`) resolves to a real
+ * file. http(s) sources are passed straight to <Img> by the component and are left untouched.
+ * The segment.photos srcs are NOT rewritten: the file now lives at assetsDir/<src> =
+ * publicDir/generated/<src>, which matches the existing 'generated/<src>' convention.
+ */
+export function copyLocalPhotos(segments: SegmentProps[], tripDir: string, assetsDir: string): void {
+  for (const seg of segments) {
+    for (const src of seg.photos) {
+      if (/^https?:\/\//i.test(src)) continue;
+      const from = resolve(tripDir, src);
+      const dest = join(assetsDir, src);
+      mkdirSync(dirname(dest), { recursive: true });
+      cpSync(from, dest);
+    }
+  }
+}
 
 async function main() {
   const tripPath = process.argv[2];
@@ -57,11 +77,18 @@ async function main() {
     }
   );
 
+  // Copy each trip's LOCAL photos into the served assets dir so staticFile() can reach them.
+  copyLocalPhotos(props.segments, dirname(tripPath), assetsDir);
+
   // Copy resolved music into the served assets dir so staticFile() can reach it.
   let musicForProps = props.music;
   if (props.music && existsSync(props.music)) {
     const dest = join(assetsDir, 'music.mp3');
-    cpSync(props.music, dest);
+    // The AI music path already writes into assetsDir, so src === dest. cpSync throws
+    // ERR_FS_CP_EINVAL when copying a file onto itself; skip the copy in that case.
+    if (resolve(props.music) !== resolve(dest)) {
+      cpSync(props.music, dest);
+    }
     musicForProps = 'generated/music.mp3';
   }
   const finalProps = { ...props, music: musicForProps };
@@ -78,4 +105,8 @@ async function main() {
   });
   console.log(`\n✓ ${outPath}`);
 }
-main().catch((e) => { console.error('\n✖ ' + e.message); process.exit(1); });
+// Only run the CLI when this module is the entrypoint, not when imported (e.g. by tests
+// that exercise exported helpers like copyLocalPhotos).
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch((e) => { console.error('\n✖ ' + e.message); process.exit(1); });
+}
