@@ -1,0 +1,39 @@
+trip:
+  title: "Test Trip"
+  dates: "May 15-16, 2026"
+  total_days: 2
+  origin: "Fresno, CA"
+  origin_lat: 36.7378
+  origin_lng: -119.7871
+days:
+  - number: 1
+    title: "Valley Floor"
+    date: "Friday, May 15"
+    color: "#2e7db5"
+    stops:
+      - name: "Lower Yosemite Fall"
+        lat: 37.7561
+        lng: -119.5966
+        type: hike
+        description: "Easy 1-mile loop to the base of the lower fall."
+        media:
+          - src: "media/fall_01.jpg"
+            type: photo
+            caption: "Roaring with May snowmelt"
+            lat: 37.7560
+            lng: -119.5965
+      - name: "Tunnel View"
+        lat: 37.7159
+        lng: -119.6770
+        type: scenic
+        description: "The classic Yosemite panorama."
+  - number: 2
+    title: "Mariposa Grove"
+    date: "Saturday, May 16"
+    color: "#2d7a50"
+    stops:
+      - name: "Mariposa Grove"
+        lat: 37.5142
+        lng: -119.6010
+        type: hike
+        description: "Giant sequoias on the lower loop."
