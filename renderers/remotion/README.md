@@ -43,7 +43,8 @@ Flags: `--narrate` (needs `TRIPKIT_TTS_KEY`), `--music <file|ai>` (`ai` needs
   provider whose terms permit rendered/exported media, with attribution shown
   on-screen. **Esri** public tiles (`--tiles esri`) are **non-commercial only** —
   don't monetize Esri-tiled output.
-- `assets/music/default.mp3` is a royalty-free ambient track, safe to
+- `assets/music/default.mp3` is an original AI-generated calm acoustic
+  instrumental (royalty-free, no third-party attribution required), safe to
   distribute. Swap in your own with `--music <file>` for a different mood.
 
 ## Example

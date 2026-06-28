@@ -15,7 +15,7 @@ export const Trip: React.FC<VideoProps> = (props) => {
   let from = props.intro ? props.intro.durationInFrames : 0;
   return (
     <AbsoluteFill style={{ backgroundColor: '#000' }}>
-      {props.music ? <Audio src={props.music.startsWith('http') ? props.music : staticFile(props.music)} volume={() => 0.25} /> : null}
+      {props.music ? <Audio src={props.music.startsWith('http') ? props.music : staticFile(props.music)} volume={() => 0.35} /> : null}
       {props.intro ? (
         <Sequence from={0} durationInFrames={props.intro.durationInFrames}>
           <IntroCard intro={props.intro} title={props.title} subtitle={props.subtitle} dates={props.dates} assetBase={ASSET_BASE} />
