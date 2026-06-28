@@ -74,7 +74,7 @@ export interface SegmentProps {
   captions: CaptionToken[];
   durationInFrames: number;
 }
-export interface VideoProps {
+export type VideoProps = {
   title: string;
   subtitle: string;
   fps: number;
@@ -83,4 +83,4 @@ export interface VideoProps {
   music: string | null;
   attribution: string;
   segments: SegmentProps[];
-}
+};
