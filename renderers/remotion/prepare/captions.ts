@@ -14,11 +14,13 @@ export async function transcribeToTokens(audioPath: string): Promise<CaptionToke
   try {
     const { installWhisperCpp, downloadWhisperModel, transcribe, toCaptions } = await import('@remotion/install-whisper-cpp');
     const to = '/tmp/whisper.cpp';
-    await installWhisperCpp({ to, version: '1.5.5' });
+    const whisperCppVersion = '1.5.5';
+    await installWhisperCpp({ to, version: whisperCppVersion });
     await downloadWhisperModel({ model: 'medium.en', folder: to });
-    const { transcription } = await transcribe({
+    const transcription = await transcribe({
       inputPath: audioPath,
       whisperPath: to,
+      whisperCppVersion,
       model: 'medium.en',
       tokenLevelTimestamps: true,
     });
