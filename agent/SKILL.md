@@ -52,6 +52,17 @@ Captions are the high-value artifact here — they're what the lightbox shows. K
 
 Full reference (review-file format, matching rules, edge cases): `docs/MEDIA-GUIDE.md`.
 
+### Phase 6: Trip video narration (optional)
+
+If the traveler wants a recap **video** (the `renderers/remotion/` package), they run
+`npm run narrate -- trip.yaml` to scaffold `trip.narration.yaml` (one entry per stop).
+Your job: rewrite each `script` as **first-person-plural ("we/our")** travel narration —
+as if the traveler is recalling the trip. Ground it in the stop's `description`, the real
+photo `caption`s from Phase 5, and the `agent_context.iteration_log`, so it sounds like a
+genuine memory rather than generic travel copy. Keep ~1 sentence per few seconds of the
+stop's photo montage. Example: *"We crested the ridge and there it was — Multnomah Falls,
+roaring with spring snowmelt."* Then the traveler renders with `--narrate`.
+
 ## Schema Reference (must match `schema/tripkit.schema.yaml`)
 
 ### `trip` block

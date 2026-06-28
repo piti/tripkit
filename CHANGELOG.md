@@ -2,6 +2,11 @@
 
 All notable changes to TripKit are documented here. Versioning follows [SemVer](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+- **Trip video renderer (Remotion).** New opt-in `renderers/remotion/` package turns a media-populated `trip.yaml` into a narrated recap MP4: static-tile map that flies between stops drawing the route (`@remotion/paths`), per-stop Ken Burns photo montages with transitions, animated day/stop title cards, optional first-person TTS narration with burned-in auto-captions, and background music (user file, bundled default, or AI-generated). Pluggable tile/TTS/music adapters; MapTiler default tiles (Esri non-commercial fallback). Prepare→render split keeps frame capture deterministic. New agent skill Phase 6 writes the first-person narration script. Core `tripkit` package and its dependencies are unchanged.
+
 ## [1.4.0] — 2026-06-27
 
 ### Added

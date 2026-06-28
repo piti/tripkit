@@ -92,6 +92,8 @@ Step 1 reads EXIF GPS + timestamps and auto-matches each photo to the nearest st
 
 📖 **Full walkthrough:** [docs/MEDIA-GUIDE.md](docs/MEDIA-GUIDE.md) — the review-file format, how matching works, letting an AI agent caption and place your photos, and troubleshooting.
 
+🎬 **Make a trip video:** the [Remotion video renderer](renderers/remotion/README.md) turns the same media-populated trip into a narrated recap MP4 — map flys, photo montages, captions, music. Opt-in (`cd renderers/remotion && npm install`).
+
 ### Option 3: With an AI Agent (everyone)
 
 1. Start a conversation with your preferred AI agent (Claude recommended)
