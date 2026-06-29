@@ -1,6 +1,6 @@
 {
   "name": "tripkit",
-  "version": "1.4.0",
+  "version": "1.5.0-alpha.0",
   "description": "Open-source framework for AI-assisted trip planning with beautiful interactive visualizers",
   "main": "convert.js",
   "bin": {
