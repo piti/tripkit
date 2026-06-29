@@ -1,0 +1,4 @@
+node_modules/
+assets/generated/
+out/
+*.mp4

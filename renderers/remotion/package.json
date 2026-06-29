@@ -1,0 +1,42 @@
+{
+  "name": "@tripkit/remotion-renderer",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "TripKit video renderer — turns a trip.yaml into a narrated trip-recap MP4 (opt-in, Remotion-based).",
+  "scripts": {
+    "test": "vitest run",
+    "narrate": "tsx scripts/narrate.ts",
+    "video": "tsx scripts/video.ts",
+    "studio": "remotion studio src/index.ts"
+  },
+  "dependencies": {
+    "@remotion/bundler": "4.0.484",
+    "@remotion/captions": "4.0.484",
+    "@remotion/cli": "4.0.484",
+    "@remotion/google-fonts": "4.0.484",
+    "@remotion/install-whisper-cpp": "4.0.484",
+    "@remotion/layout-utils": "4.0.484",
+    "@remotion/media": "4.0.484",
+    "@remotion/media-utils": "4.0.484",
+    "@remotion/motion-blur": "4.0.484",
+    "@remotion/noise": "4.0.484",
+    "@remotion/paths": "4.0.484",
+    "@remotion/renderer": "4.0.484",
+    "@remotion/transitions": "4.0.484",
+    "remotion": "4.0.484",
+    "d3-interpolate": "3.0.1",
+    "js-yaml": "4.1.0",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "staticmaps": "1.13.1"
+  },
+  "devDependencies": {
+    "@types/d3-interpolate": "3.0.4",
+    "@types/js-yaml": "4.0.9",
+    "@types/react": "19.0.0",
+    "tsx": "4.19.2",
+    "typescript": "5.7.2",
+    "vitest": "2.1.8"
+  }
+}
